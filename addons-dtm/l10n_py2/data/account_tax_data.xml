@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ITAX_iva_debito_10" model="account.tax.template">
+      <field name="chart_template_id" ref="py_chart_template"/>
+      <field name="name">IVA Débito Fiscal 10%</field>
+      <field name="description">IVA_DEBITO_10</field>
+      <field name="amount">10</field>
+      <field name="amount_type">percent</field>
+      <field name="type_tax_use">sale</field>
+      <field name="price_include" eval="True"/>
+      <field name="include_base_amount" eval="True"/>
+      <field name="refund_account_id" ref="21321"/>
+      <field name="account_id" ref="21321"/>
+    </record>
+
+    <record id="ITAX_iva_credito_10" model="account.tax.template">
+      <field name="chart_template_id" ref="py_chart_template"/>
+      <field name="name">IVA Crédito Fiscal 10%</field>
+      <field name="description">IVA_CREDITO_10</field>
+      <field name="amount">10</field>
+      <field name="amount_type">percent</field>
+      <field name="type_tax_use">purchase</field>
+        <field name="price_include" eval="True"/>
+      <field name="include_base_amount" eval="True"/>
+      <field name="refund_account_id" ref="11341"/>
+      <field name="account_id" ref="11341"/>
+    </record>
+
+    <record id="ITAX_iva_credito_5" model="account.tax.template">
+      <field name="chart_template_id" ref="py_chart_template"/>
+      <field name="name">IVA Crédito Fiscal 5%</field>
+      <field name="description">IVA_CREDITO_5</field>
+      <field name="amount">5</field>
+      <field name="amount_type">percent</field>
+      <field name="type_tax_use">purchase</field>
+        <field name="price_include" eval="True"/>
+      <field name="include_base_amount" eval="True"/>
+      <field name="refund_account_id" ref="11342"/>
+      <field name="account_id" ref="11342"/>
+    </record>
+
+    <record id="ITAX_iva_debito_5" model="account.tax.template">
+      <field name="chart_template_id" ref="py_chart_template"/>
+      <field name="name">IVA Débito Fiscal 5%</field>
+      <field name="description">IVA_DEBITO_5</field>
+      <field name="amount">5</field>
+      <field name="price_include" eval="True"/>
+      <field name="include_base_amount" eval="True"/>
+      <field name="amount_type">percent</field>
+      <field name="type_tax_use">sale</field>
+      <field name="refund_account_id" ref="21322"/>
+      <field name="account_id" ref="21322"/>
+    </record>
+
+    <record id="ITAX_iva_credito_exenta" model="account.tax.template">
+      <field name="chart_template_id" ref="py_chart_template"/>
+      <field name="name">IVA Crédito Fiscal Exento</field>
+      <field name="description">IVA_CREDITO_EXENTO</field>
+      <field name="amount">0</field>
+      <field name="price_include" eval="True"/>
+      <field name="include_base_amount" eval="True"/>
+      <field name="amount_type">percent</field>
+      <field name="type_tax_use">purchase</field>
+    </record>
+
+     <record id="ITAX_iva_debito_exenta" model="account.tax.template">
+      <field name="chart_template_id" ref="py_chart_template"/>
+      <field name="name">IVA Débito Fiscal Exento</field>
+      <field name="description">IVA_DEBITO_EXENTO</field>
+      <field name="amount">0</field>
+      <field name="price_include" eval="True"/>
+      <field name="include_base_amount" eval="True"/>
+      <field name="amount_type">percent</field>
+      <field name="type_tax_use">sale</field>
+    </record>
+
+</odoo>

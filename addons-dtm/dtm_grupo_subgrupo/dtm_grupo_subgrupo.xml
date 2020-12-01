@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+                
+        <record id="dtm_grupo_subgrupoForm" model="ir.ui.view">
+            <field name="name">Rubros y Subrubros</field>
+            <field name="model">dtm.grupo.subgrupo</field>
+            <field name="arch" type="xml">
+                        <form string="Grupos">
+                            <sheet>
+                                <group>
+                                      <field name="grupos"/>
+                                </group>
+                                
+                                <group>
+                                      <field name="subgrupo"/>
+                                   
+                                </group>
+
+                            </sheet>
+                                     
+                        </form>
+          </field>
+        </record>
+
+        <record id="dtm_grupo_subgrupo_Action" model="ir.actions.act_window">
+            <field name="name">Rubros y Subrubros</field>
+            <field name="res_model">dtm.grupo.subgrupo</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+                    
+            <menuitem
+                name="Rubros y subrubros"
+                id="menu_grupos"
+                parent="sales_team.menu_sale_config"
+                sequence="5"
+             />
+
+
+
+        <menuitem action="dtm_grupo_subgrupo_Action"
+                  id="menu_grupos_submenu"
+                  sequence="1"
+                  name="Rubros"
+                  parent="menu_grupos" />
+
+
+        <!-- Ahora van registros de subgrupos!!!! -->
+
+        <record id="dtm_subgrupo_form" model="ir.ui.view">
+            <field name="name">Subrubros</field>
+            <field name="model">subgrupos.laborales</field>
+            <field name="arch" type="xml">
+                <form string="Subrubros">
+                    <sheet>
+                      <group>
+                            <field name="grupo" widget="selection"/>
+                      </group>
+
+                      <group>
+                            <field name="subgrupo"/>
+                      </group>
+
+                    </sheet>
+                             
+                </form>
+            </field>
+        </record>
+
+
+        <record id="dtm_subgrupo_action" model="ir.actions.act_window">
+            <field name="name">Rubros y subrubros</field>
+            <field name="res_model">subgrupos.laborales</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+                    
+        <menuitem action="dtm_subgrupo_action"
+                  id="menu_subgrupos_grupos"
+                  sequence="1"
+                  name="Subrubros"
+                  parent="menu_grupos" />
+
+
+
+
+
+        <!-- herencia de Form de Clientes agrego el campo -->
+        <record model="ir.ui.view" id="cliente_form_herencia">
+                <field name="name">Rubros y subrubros</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">
+                    
+
+
+                    <xpath expr="//field[@name='title']" position="after">
+                
+                       
+                        <field name="grupo" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible': [('is_company','=',True)]}"/>
+                        <field name="subgrupo" options="{'no_create': True, 'no_create_edit':True}" attrs="{'invisible': [('is_company','=',True)]}"/>
+                        <field name="forma_pago" attrs="{'invisible': [('is_company','=',True)]}"/>
+                        <field name="nro_cliente" attrs="{'invisible': [('is_company','=',True)]}"/>
+                        <field name="convenio" attrs="{'invisible': [('is_company','=',True)]}"/>
+
+                        <field name="genero" attrs="{'invisible': [('is_company','=',True)]}"/>
+                        <field name="fecha_creacion" attrs="{'invisible': [('is_company','=',False)]}"/>
+                        <field name="fecha_nacimiento" attrs="{'invisible': [('is_company','=',True)]}"/>
+                        <field name="cantidad_socios" attrs="{'invisible': [('is_company','=',False)]}"/>
+
+                    </xpath>
+
+
+                </field>
+            </record>
+
+
+
+
+    
+
+
+    </data>
+</odoo>
+

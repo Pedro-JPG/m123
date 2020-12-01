@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+
+
+
+    <!-- IMPORTACION DE EMPRESA | EMPLEADOS -->
+        <record model="ir.ui.view" id="dtm_importar_empleados_v10_form_">
+            <field name="name">Carga de Empresa/Empleados con Archivo Atyr</field>
+            <field name="model">dtm.importar.empleados.v10</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Carga de Empresa/Empleados con Archivo Atyr" colspan="4">
+                            <field name="csv_data"/>
+                            <field name="csv_ok" invisible="1"/>
+                        </group>
+                       
+                        <!-- <field name="csv_errors" nolabel="1" readonly="1" colspan="4"/> -->
+                        <field name="pickle_empresa" nolabel="1" invisible="1" colspan="4"/>
+                        <field name="pickle_empleados" nolabel="1" invisible="1" colspan="4"/>
+                                              
+                       <!--  <footer> -->
+                            
+                                <button class="oe_stat_button"
+                                    name="import_info_empresa"
+                                    icon="fa-cloud-upload"
+                                    string="Importar Atyr"
+                                    type="object"
+                                    help="Importa la Empresa y los Empleados del Archivo Atyr" 
+                                    style="margin:80px 20px 20px 345px">
+                                </button>
+                    
+
+                    <!--    
+                        </footer> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="dtm_importar_empleados_v10_form">
+            <field name="name">Carga de Empresa/Empleados con Archivo Atyr</field>
+            <field name="res_model">dtm.importar.empleados.v10</field>
+            <field name="view_mode">form</field>
+            <!--<field name="context">{'in_hrf': True, 'in_hrn': False}</field> -->
+        </record>
+
+         
+         <menuitem
+            id="menu_importar_empleados"
+            parent="hr.menu_human_resources_configuration"
+            name="Importar Empresa/Empleados"
+            action="dtm_importar_empleados_v10_form"
+            sequence="80"
+        />
+
+             
+       
+
+            <!--            Res.Company     -->
+            <record model="ir.ui.view" id="res_company_inherit">
+                <field name="name">Compania</field>
+                <field name="model">res.company</field>
+                <field name="inherit_id" ref="base.view_company_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='vat']" position="after">
+                        <field name="bps_id" />
+                    </xpath>
+
+                 
+
+                </field>
+            </record>
+
+
+            <!--            hr.employee     -->
+            <record model="ir.ui.view" id="hr_employee_inherit">
+                <field name="name">Empleados</field>
+                <field name="model">hr.employee</field>
+                <field name="inherit_id" ref="hr.view_employee_form"/>
+                <field name="arch" type="xml">
+                    
+                    <xpath expr="//field[@name='user_id']" position="after">
+                        <field name="acum_laboral" />
+                        <field name="bps_seg_salud" />
+                        <field name="bps_fecha_ingreso" />
+                        <field name="bps_tipo_contribucion" />
+                        <field name="bps_codigo_funcional" />
+                        <field name="bps_fecha_baja" />
+
+                    </xpath>
+                 
+                </field>
+            </record>
+
+
+
+
+
+
+</data>
+</odoo>

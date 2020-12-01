@@ -1,0 +1,2728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--<menuitem id="account_reports_ar_statements_menu" name="Argentine Statements" parent="account.menu_finance_reports" sequence="3" groups="account.group_account_user"/>-->
+
+    <record id="account_account_type_NCLASIFICADO" model="account.account.type">
+        <field name="name">Cuentas No Clasificadas</field>
+    </record>
+
+    <record id="transfer_account_id" model="account.account.template">
+        <field name="name">Cuenta de Transferencia</field>
+        <field name="code">13</field>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+    </record>
+
+    <record id="py_chart_template" model="account.chart.template">
+      <field name="name">Paraguay - Plan de Cuentas</field>
+      <field name="code_digits">0</field>
+      <field name="bank_account_code_prefix">11</field>
+      <field name="cash_account_code_prefix">12</field>
+      <field name="currency_id" ref="base.PYG"/>
+      <field name="transfer_account_id" ref="transfer_account_id"/>
+    </record>
+
+    <record id="transfer_account_id" model="account.account.template">
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+	<!--  Cuentas Activo -->
+    <record id="1" model="account.account.template">
+        <field name="name">Activo</field>
+        <field name="code">1</field>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11" model="account.account.template">
+        <field name="name">Activo Corriente</field>
+        <field name="code">1.1</field>
+        <field name="parent_id" ref="1"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="111" model="account.account.template">
+        <field name="name">Disponibilidades</field>
+        <field name="code">1.1.1</field>
+        <field name="parent_id" ref="11"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1111" model="account.account.template">
+        <field name="name">Caja</field>
+        <field name="code">1.1.1.1</field>
+        <field name="parent_id" ref="111"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11112" model="account.account.template">
+        <field name="name">Recaudaciones a Depositar Gs.</field>
+        <field name="code">1.1.1.1.2</field>
+        <field name="parent_id" ref="1111"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_receivable" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11113" model="account.account.template">
+        <field name="name">Recaudaciones a Depositar USD..</field>
+        <field name="code">1.1.1.1.3</field>
+        <field name="parent_id" ref="1111"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_receivable" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1112" model="account.account.template">
+        <field name="name">Bancos</field>
+        <field name="code">1.1.1.2</field>
+        <field name="parent_id" ref="111"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1113" model="account.account.template">
+        <field name="name">Otros valores</field>
+        <field name="code">1.1.1.3</field>
+        <field name="parent_id" ref="111"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="112" model="account.account.template">
+        <field name="name">Inversiones Temporarias</field>
+        <field name="code">1.1.2</field>
+        <field name="parent_id" ref="11"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1121" model="account.account.template">
+        <field name="name">Inversiones Financieras</field>
+        <field name="code">1.1.2.1</field>
+        <field name="parent_id" ref="112"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1122" model="account.account.template">
+        <field name="name">Inversiones en entidades vinculadas</field>
+        <field name="code">1.1.2.2</field>
+        <field name="parent_id" ref="112"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1123" model="account.account.template">
+        <field name="name">Otras inversiones</field>
+        <field name="code">1.1.2.3</field>
+        <field name="parent_id" ref="112"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1124" model="account.account.template">
+        <field name="name">Acciones de otras empresas</field>
+        <field name="code">1.1.2.4</field>
+        <field name="parent_id" ref="112"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="113" model="account.account.template">
+        <field name="name">Créditos</field>
+        <field name="code">1.1.3</field>
+        <field name="parent_id" ref="11"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="1131" model="account.account.template">
+        <field name="name">Deudores por Ventas</field>
+        <field name="code">1.1.3.1</field>
+        <field name="parent_id" ref="113"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_receivable" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1132" model="account.account.template">
+        <field name="name">Deudores Varios</field>
+        <field name="code">1.1.3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_receivable" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1133" model="account.account.template">
+        <field name="name">Deudores por préstamos</field>
+        <field name="code">1.1.3.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_receivable" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1134" model="account.account.template">
+        <field name="name">Impuesto al Valor Agregado</field>
+        <field name="code">1.1.3.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11341" model="account.account.template">
+        <field name="name">IVA Crédito Fiscal 10%</field>
+        <field name="code">1.1.3.4.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1134"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11342" model="account.account.template">
+        <field name="name">IVA Crédito Fiscal 5%</field>
+        <field name="code">1.1.3.4.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1134"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11343" model="account.account.template">
+        <field name="name">IVA Saldo Técnico</field>
+        <field name="code">1.1.3.4.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1134"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11344" model="account.account.template">
+        <field name="name">IVA Saldo Financiero</field>
+        <field name="code">1.1.3.4.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1134"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11345" model="account.account.template">
+        <field name="name">IVA Pagos no Aplicados</field>
+        <field name="code">1.1.3.4.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1134"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1135" model="account.account.template">
+        <field name="name">Retención de IVA</field>
+        <field name="code">1.1.3.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1136" model="account.account.template">
+        <field name="name">Anticipo de impuesto a la Renta</field>
+        <field name="code">1.1.3.6</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1137" model="account.account.template">
+        <field name="name">Retención Impuesto a la Renta</field>
+        <field name="code">1.1.3.7</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1138" model="account.account.template">
+        <field name="name">Cuentas a Cobras a Directores y Funcionarios</field>
+        <field name="code">1.1.3.8</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1139" model="account.account.template">
+        <field name="name">Cuentas a Cobras a Socios o Entidades Vinculadas</field>
+        <field name="code">1.1.3.9</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11310" model="account.account.template">
+        <field name="name">Anticipo a Proveedores Locales</field>
+        <field name="code">1.1.3.10</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11311" model="account.account.template">
+        <field name="name">Anticipo a Proveedores del Exterior</field>
+        <field name="code">1.1.3.11</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11312" model="account.account.template">
+        <field name="name">Cheques Diferidos</field>
+        <field name="code">1.1.3.12</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11313" model="account.account.template">
+        <field name="name">Cheques Devueltos</field>
+        <field name="code">1.1.3.13</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="113"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="114" model="account.account.template">
+        <field name="name">Inventarios</field>
+        <field name="code">1.1.4</field>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1141" model="account.account.template">
+        <field name="name">Mercaderías</field>
+        <field name="code">1.1.4.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="114"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11411" model="account.account.template">
+        <field name="name">Mercaderías gravadas al 10%</field>
+        <field name="code">1.1.4.1.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1141"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="11412" model="account.account.template">
+        <field name="name">Mercaderías gravadas al 5%</field>
+        <field name="code">1.1.4.1.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1141"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True" />
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="11413" model="account.account.template">
+        <field name="name">Mercaderías Exentas del IVA</field>
+        <field name="code">1.1.4.1.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1141"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1142" model="account.account.template">
+        <field name="name">Mercaderías Regimenes Especiales</field>
+        <field name="code">1.1.4.2</field>
+        <field name="parent_id" ref="114"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11421" model="account.account.template">
+        <field name="name">Mercaderías Otros Regimenes Especiales</field>
+        <field name="code">1.1.4.2.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1142"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1143" model="account.account.template">
+        <field name="name">Productos Terminados</field>
+        <field name="code">1.1.4.3</field>
+        <field name="parent_id" ref="114"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="11431" model="account.account.template">
+        <field name="name">Productos Terminados Gravados al 10 %</field>
+        <field name="code">1.1.4.3.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1143"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11432" model="account.account.template">
+        <field name="name">Productos Terminados Gravados al 5 %</field>
+        <field name="code">1.1.4.3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1143"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="11433" model="account.account.template">
+        <field name="name">Productos Terminados Exentos del IVA</field>
+        <field name="code">1.1.4.3.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="1143"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1144" model="account.account.template">
+        <field name="name">Productos en Proceso</field>
+        <field name="code">1.1.4.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="114"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1145" model="account.account.template">
+        <field name="name">Materias Primas</field>
+        <field name="code">1.1.4.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="114"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1146" model="account.account.template">
+        <field name="name">Materiales, Suministros y Repuestos</field>
+        <field name="code">1.1.4.6</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="114"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1147" model="account.account.template">
+        <field name="name">Importaciones en Curso</field>
+        <field name="code">1.1.4.7</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="114"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="115" model="account.account.template">
+        <field name="name">Gastos Pagados por Adelantado</field>
+        <field name="code">1.1.5</field>
+        <field name="parent_id" ref="11"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1151" model="account.account.template">
+        <field name="name">Alquileres a Vencer</field>
+        <field name="code">1.1.5.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="115"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1152" model="account.account.template">
+        <field name="name">Seguros a Vencer</field>
+        <field name="code">1.1.5.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="115"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1153" model="account.account.template">
+        <field name="name">Intereses a Vencer</field>
+        <field name="code">1.1.5.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="115"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="116" model="account.account.template">
+        <field name="name">Otros Activos</field>
+        <field name="code">1.1.6</field>
+        <field name="parent_id" ref="11"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1161" model="account.account.template">
+        <field name="name">Obras en Ejecución</field>
+        <field name="code">1.1.6.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="116"/>
+        <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12" model="account.account.template">
+        <field name="name">Activo No Corriente</field>
+        <field name="code">1.2</field>
+        <field name="parent_id" ref="1"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="121" model="account.account.template">
+        <field name="name">Créditos a Largo Plazo</field>
+        <field name="code">1.2.1</field>
+        <field name="parent_id" ref="12"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1211" model="account.account.template">
+        <field name="name">Deudores por Ventas</field>
+        <field name="code">1.2.1.1</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="1212" model="account.account.template">
+        <field name="name">Deudores por Préstamos</field>
+        <field name="code">1.2.1.2</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1213" model="account.account.template">
+        <field name="name">Deudores Varios</field>
+        <field name="code">1.2.1.3</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1214" model="account.account.template">
+        <field name="name">Cuentas a Cobrar a Directores y Funcionarios</field>
+        <field name="code">1.2.1.4</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1215" model="account.account.template">
+        <field name="name">Cuentas a Cobrar a Socios o Entidades Vinculadas</field>
+        <field name="code">1.2.1.5</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1216" model="account.account.template">
+        <field name="name">Deudores en Gestión de Cobros</field>
+        <field name="code">1.2.1.6</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="1217" model="account.account.template">
+        <field name="name">Anticipos a Proveedores Locales</field>
+        <field name="code">1.2.1.7</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1218" model="account.account.template">
+        <field name="name">Anticipos a Proveedores del Exterior</field>
+        <field name="code">1.2.1.8</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1219" model="account.account.template">
+        <field name="name">Créditos por Impuestos Diferidos</field>
+        <field name="code">1.2.1.9</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12110" model="account.account.template">
+        <field name="name">Garantía de Alquiler</field>
+        <field name="code">1.2.1.10</field>
+        <field name="parent_id" ref="121"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="122" model="account.account.template">
+        <field name="name">Inventarios a Realizar a Largo Plazo</field>
+        <field name="code">1.2.2</field>
+        <field name="parent_id" ref="12"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="123" model="account.account.template">
+        <field name="name">Inversiones a Largo Plazo</field>
+        <field name="code">1.2.3</field>
+        <field name="parent_id" ref="12"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="124" model="account.account.template">
+        <field name="name">Propiedad, Planta y Equipo</field>
+        <field name="code">1.2.4</field>
+        <field name="parent_id" ref="12"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1241" model="account.account.template">
+        <field name="name">Bienes en Operación</field>
+        <field name="code">1.2.4.1</field>
+        <field name="parent_id" ref="124"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12411" model="account.account.template">
+        <field name="name">Muebles y Útiles</field>
+        <field name="code">1.2.4.1.1</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12412" model="account.account.template">
+        <field name="name">Equipos de Informática</field>
+        <field name="code">1.2.4.1.2</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12413" model="account.account.template">
+        <field name="name">Sistemas de Informática</field>
+        <field name="code">1.2.4.1.3</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12414" model="account.account.template">
+        <field name="name">Rodados</field>
+        <field name="code">1.2.4.1.4</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12415" model="account.account.template">
+        <field name="name">Maquinarias</field>
+        <field name="code">1.2.4.1.5</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12416" model="account.account.template">
+        <field name="name">Herramientas y Equipos</field>
+        <field name="code">1.2.4.1.6</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12417" model="account.account.template">
+        <field name="name">Mejoras en Predio Ajeno</field>
+        <field name="code">1.2.4.1.7</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12418" model="account.account.template">
+        <field name="name">Instalaciones</field>
+        <field name="code">1.2.4.1.8</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12419" model="account.account.template">
+        <field name="name">Edificios</field>
+        <field name="code">1.2.4.1.9</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="124110" model="account.account.template">
+        <field name="name">Terrenos</field>
+        <field name="code">1.2.4.1.10</field>
+        <field name="parent_id" ref="1241"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1242" model="account.account.template">
+        <field name="name">Depreciaciones Acumuladas</field>
+        <field name="code">1.2.4.2</field>
+        <field name="parent_id" ref="124"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12421" model="account.account.template">
+        <field name="name">Muebles y Útiles</field>
+        <field name="code">1.2.4.2.1</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12422" model="account.account.template">
+        <field name="name">Equipos de Informática</field>
+        <field name="code">1.2.4.2.2</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12423" model="account.account.template">
+        <field name="name">Sistemas de Informática</field>
+        <field name="code">1.2.4.2.3</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12424" model="account.account.template">
+        <field name="name">Rodados</field>
+        <field name="code">1.2.4.2.4</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12425" model="account.account.template">
+        <field name="name">Maquinarias</field>
+        <field name="code">1.2.4.2.5</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12426" model="account.account.template">
+        <field name="name">Herramientas y Equipos</field>
+        <field name="code">1.2.4.2.6</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12427" model="account.account.template">
+        <field name="name">Mejoras en Predio Ajeno</field>
+        <field name="code">1.2.4.2.7</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12428" model="account.account.template">
+        <field name="name">Instalaciones</field>
+        <field name="code">1.2.4.2.8</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12429" model="account.account.template">
+        <field name="name">Edificios</field>
+        <field name="code">1.2.4.2.9</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="124210" model="account.account.template">
+        <field name="name">Terrenos</field>
+        <field name="code">1.2.4.2.10</field>
+        <field name="parent_id" ref="1242"/>
+        <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="125" model="account.account.template">
+        <field name="name">Otros activos a largo plazo</field>
+        <field name="code">1.2.5</field>
+        <field name="parent_id" ref="12"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="126" model="account.account.template">
+        <field name="name">Cargos Diferidos</field>
+        <field name="code">1.2.6</field>
+        <field name="parent_id" ref="12"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1261" model="account.account.template">
+        <field name="name">Gastos de Constitución</field>
+        <field name="code">1.2.6.1</field>
+        <field name="parent_id" ref="126"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1262" model="account.account.template">
+        <field name="name">Gastos de Organización</field>
+        <field name="code">1.2.6.2</field>
+        <field name="parent_id" ref="126"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1263" model="account.account.template">
+        <field name="name">Gastos de Desarrollo</field>
+        <field name="code">1.2.6.3</field>
+        <field name="parent_id" ref="126"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1264" model="account.account.template">
+        <field name="name">Gastos de Proyectos de Inversión</field>
+        <field name="code">1.2.6.4</field>
+        <field name="parent_id" ref="126"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1265" model="account.account.template">
+        <field name="name">Gastos de Pre-Operativos</field>
+        <field name="code">1.2.6.5</field>
+        <field name="parent_id" ref="126"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="12699" model="account.account.template">
+        <field name="name">Amortizaciones Acumuladas</field>
+        <field name="code">1.2.6.99</field>
+        <field name="parent_id" ref="126"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="127" model="account.account.template">
+        <field name="name">Activos Intangibles</field>
+        <field name="code">1.2.7</field>
+        <field name="parent_id" ref="12"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="1271" model="account.account.template">
+        <field name="name">Licencias, Marcas y Patentes</field>
+        <field name="code">1.2.7.1</field>
+        <field name="parent_id" ref="127"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="1272" model="account.account.template">
+        <field name="name">Franquicias</field>
+        <field name="code">1.2.7.2</field>
+        <field name="parent_id" ref="127"/>
+        <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+        <field name="reconcile" eval="True"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+   
+
+    <record id="2" model="account.account.template">
+        <field name="name">Pasivo</field>
+        <field name="code">2</field>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="21" model="account.account.template">
+        <field name="name">Pasivo Corriente</field>
+        <field name="code">2.1</field>
+        <field name="parent_id" ref="2"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="211" model="account.account.template">
+        <field name="name">Deudas Comerciales</field>
+        <field name="code">2.1.1</field>
+        <field name="parent_id" ref="21"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2111" model="account.account.template">
+        <field name="name">Proveedores Locales</field>
+        <field name="code">2.1.1.1</field>
+        <field name="parent_id" ref="211"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_payable" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2112" model="account.account.template">
+        <field name="name">Proveedores del Exterior</field>
+        <field name="code">2.1.1.2</field>
+        <field name="parent_id" ref="211"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_payable" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2113" model="account.account.template">
+        <field name="name">Intereses a pagar a proveedores</field>
+        <field name="code">2.1.1.3</field>
+        <field name="parent_id" ref="211"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2114" model="account.account.template">
+        <field name="name">Acreedores varios</field>
+        <field name="code">2.1.1.4</field>
+        <field name="parent_id" ref="211"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2115" model="account.account.template">
+        <field name="name">Cheques diferidos</field>
+        <field name="code">2.1.1.5</field>
+        <field name="parent_id" ref="211"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2116" model="account.account.template">
+        <field name="name">Tarjetas de Crédito</field>
+        <field name="code">2.1.1.6</field>
+        <field name="parent_id" ref="211"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2117" model="account.account.template">
+        <field name="name">Seguros a Pagar</field>
+        <field name="code">2.1.1.7</field>
+        <field name="parent_id" ref="211"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="212" model="account.account.template">
+        <field name="name">Deudas financieras</field>
+        <field name="code">2.1.2</field>
+        <field name="parent_id" ref="21"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2121" model="account.account.template">
+        <field name="name">Sobregiros en Cta.Cte.</field>
+        <field name="code">2.1.2.1</field>
+        <field name="parent_id" ref="212"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2122" model="account.account.template">
+        <field name="name">Prestamos Bancarios y Financieras</field>
+        <field name="code">2.1.2.2</field>
+        <field name="parent_id" ref="212"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2123" model="account.account.template">
+        <field name="name">Prestamo de Socios o Entidades Vinculadas</field>
+        <field name="code">2.1.2.3</field>
+        <field name="parent_id" ref="212"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="reconcile">1</field>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="2124" model="account.account.template">
+        <field name="name">Otros Préstamos a Pagar</field>
+        <field name="code">2.1.2.4</field>
+        <field name="parent_id" ref="212"/>
+        <field name="reconcile" eval="True"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2125" model="account.account.template">
+        <field name="name">Intereses a Pagar</field>
+        <field name="code">2.1.2.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="212"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="213" model="account.account.template">
+        <field name="name">Otras Cuentas a Pagar</field>
+        <field name="code">2.1.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="21"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2131" model="account.account.template">
+        <field name="name">Impuesto a la Renta a Pagar</field>
+        <field name="code">2.1.3.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="213"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2132" model="account.account.template">
+        <field name="name">Impuesto al Valor Agregado</field>
+        <field name="code">2.1.3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="213"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="21321" model="account.account.template">
+        <field name="name">IVA Débito Fiscal 10%</field>
+        <field name="code">2.1.3.4.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="2132"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="21322" model="account.account.template">
+        <field name="name">IVA Débito Fiscal 5%</field>
+        <field name="code">2.1.3.2.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="2132"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2133" model="account.account.template">
+        <field name="name">Retenciones de Impuestos</field>
+        <field name="code">2.1.3.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="213"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="21331" model="account.account.template">
+        <field name="name">Retención IVA a Proveedores Locales</field>
+        <field name="code">2.1.3.3.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="2133"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="21332" model="account.account.template">
+        <field name="name">Retención IVA a Proveedores del Exterior</field>
+        <field name="code">2.1.3.3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="2133"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="21333" model="account.account.template">
+        <field name="name">Retención Renta a Proveedores Locales</field>
+        <field name="code">2.1.3.3.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="2133"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="21334" model="account.account.template">
+        <field name="name">Retención Renta a Proveedores del Exterior</field>
+        <field name="code">2.1.3.3.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="2133"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2134" model="account.account.template">
+        <field name="name">Obligaciones Laborales y Cargas Sociales</field>
+        <field name="code">2.1.3.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="213"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2135" model="account.account.template">
+        <field name="name">Dividendos a Pagar</field>
+        <field name="code">2.1.3.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="213"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="214" model="account.account.template">
+        <field name="name">Provisiones</field>
+        <field name="code">2.1.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="21"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2141" model="account.account.template">
+        <field name="name">Sueldos a Pagar</field>
+        <field name="code">2.1.4.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="214"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2142" model="account.account.template">
+        <field name="name">Aguinaldos a Pagar</field>
+        <field name="code">2.1.4.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="214"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="215" model="account.account.template">
+        <field name="name">Ingresos Diferidos</field>
+        <field name="code">2.1.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="21"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+<record id="2151" model="account.account.template">
+        <field name="name">Anticipo de Clientes</field>
+        <field name="code">2.1.5.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="215"/>
+        <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+<record id="22" model="account.account.template">
+        <field name="name">Pasivo No Corriente</field>
+        <field name="code">2.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="2"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+<record id="221" model="account.account.template">
+        <field name="name">Deudas Comerciales A.L.P.</field>
+        <field name="code">2.2.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="22"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+<record id="2211" model="account.account.template">
+        <field name="name">Proveedores Locales</field>
+        <field name="code">2.2.1.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="221"/>
+        <field ref="account.data_account_type_non_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2212" model="account.account.template">
+        <field name="name">Proveedores del Exterior</field>
+        <field name="code">2.2.1.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="221"/>
+        <field ref="account.data_account_type_non_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2213" model="account.account.template">
+        <field name="name">Acreedores Varios</field>
+        <field name="code">2.2.1.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="221"/>
+        <field ref="account.data_account_type_non_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="222" model="account.account.template">
+        <field name="name">Deudas Financieras A.L.P.</field>
+        <field name="code">2.2.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="22"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2221" model="account.account.template">
+        <field name="name">Prestamos de Bancos y Financieras</field>
+        <field name="code">2.2.2.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="222"/>
+        <field ref="account.data_account_type_non_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2222" model="account.account.template">
+        <field name="name">Prestamos de Socios o Entidades Vinculadas</field>
+        <field name="code">2.2.2.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="222"/>
+        <field ref="account.data_account_type_non_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="2223" model="account.account.template">
+        <field name="name">Intereses a Pagar</field>
+        <field name="code">2.2.2.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="222"/>
+        <field ref="account.data_account_type_non_current_liabilities" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="223" model="account.account.template">
+        <field name="name">Otras Cuentas a Pagar</field>
+        <field name="code">2.2.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="22"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="224" model="account.account.template">
+        <field name="name">Provisiones A.L.P.</field>
+        <field name="code">2.2.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="22"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="225" model="account.account.template">
+        <field name="name">Ingresos Diferidos A.L.P.</field>
+        <field name="code">2.2.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="22"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="3" model="account.account.template">
+        <field name="name">Patrimonio Neto</field>
+        <field name="code">3</field>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="31" model="account.account.template">
+        <field name="name">Capital</field>
+        <field name="code">3.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="3"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="311" model="account.account.template">
+        <field name="name">Capital Integrado</field>
+        <field name="code">3.1.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="31"/>
+        <field ref="account.data_account_type_equity" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="312" model="account.account.template">
+        <field name="name">Capital Suscripto</field>
+        <field name="code">3.1.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="31"/>
+        <field ref="account.data_account_type_equity" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="313" model="account.account.template">
+        <field name="name">(-) Capital a Integrar</field>
+        <field name="code">3.1.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="31"/>
+        <field ref="account.data_account_type_equity" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="314" model="account.account.template">
+        <field name="name">Anticipo para Integracion de Capital</field>
+        <field name="code">3.1.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="31"/>
+        <field ref="account.data_account_type_equity" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="32" model="account.account.template">
+        <field name="name">Reservas</field>
+        <field name="code">3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="3"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="321" model="account.account.template">
+        <field name="name">Reserva Legal</field>
+        <field name="code">3.2.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="32"/>
+        <field ref="account.data_account_type_equity" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="322" model="account.account.template">
+        <field name="name">Reserva de Revaluo</field>
+        <field name="code">3.2.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="32"/>
+        <field ref="account.data_account_type_equity" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="323" model="account.account.template">
+        <field name="name">Reserva Facultativa</field>
+        <field name="code">3.2.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="32"/>
+        <field ref="account.data_account_type_equity" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="33" model="account.account.template">
+        <field name="name">Resultados</field>
+        <field name="code">3.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="3"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="331" model="account.account.template">
+        <field name="name">Resultados Acumulados</field>
+        <field name="code">3.3.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="33"/>
+        <field ref="account.data_account_type_equity" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="332" model="account.account.template">
+        <field name="name">Resultados del Ejercicio</field>
+        <field name="code">3.3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="33"/>
+        <field ref="account.data_account_type_equity" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4" model="account.account.template">
+        <field name="name">Ingresos</field>
+        <field name="code">4</field>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41" model="account.account.template">
+        <field name="name">Ingresos Actividad Comercial</field>
+        <field name="code">4.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="411" model="account.account.template">
+        <field name="name">Ventas</field>
+        <field name="code">4.1.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="41"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4111" model="account.account.template">
+        <field name="name">Ventas de Mercaderia</field>
+        <field name="code">4.1.1.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="411"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41111" model="account.account.template">
+        <field name="name">Ventas de Mercaderia Gravadas</field>
+        <field name="code">4.1.1.1.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4111"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41112" model="account.account.template">
+        <field name="name">Ventas de Mercaderia Exentas</field>
+        <field name="code">4.1.1.1.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4111"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4112" model="account.account.template">
+        <field name="name">Ventas de Servicios</field>
+        <field name="code">4.1.1.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="411"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41121" model="account.account.template">
+        <field name="name">Ventas de Servicios Gravados</field>
+        <field name="code">4.1.1.2.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4112"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41122" model="account.account.template">
+        <field name="name">Ventas de Servicios Exentos</field>
+        <field name="code">4.1.1.2.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4112"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4113" model="account.account.template">
+        <field name="name">Exportacion de Bienes Industrializados</field>
+        <field name="code">4.1.1.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="411"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41132" model="account.account.template">
+        <field name="name">Exportacion de Maquinarias y Equipos</field>
+        <field name="code">4.1.1.3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4113"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41133" model="account.account.template">
+        <field name="name">Exportacion de Otros Productos Industrializados</field>
+        <field name="code">4.1.1.3.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4113"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4114" model="account.account.template">
+        <field name="name">Venta de Bienes Industrializados </field>
+        <field name="code">4.1.1.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="411"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41142" model="account.account.template">
+        <field name="name">Ventas de Bienes Industrializados Gravadas</field>
+        <field name="code">4.1.1.4.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4114"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41143" model="account.account.template">
+        <field name="name">Ventas de Bienes Industrializados Exentas</field>
+        <field name="code">4.1.1.4.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4114"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41199" model="account.account.template">
+        <field name="name">Descuentos y Devoluciones</field>
+        <field name="code">4.1.1.99</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="411"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+<record id="411991" model="account.account.template">
+        <field name="name">Descuentos Concedidos</field>
+        <field name="code">4.1.1.99.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="411"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="411992" model="account.account.template">
+        <field name="name">Devoluciones</field>
+        <field name="code">4.1.1.99.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="411"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="412" model="account.account.template">
+        <field name="name">Costo</field>
+        <field name="code">4.1.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="41"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4121" model="account.account.template">
+        <field name="name">Costo de Mercaderia</field>
+        <field name="code">4.1.2.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="412"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41211" model="account.account.template">
+        <field name="name">Costo de Mercaderias Gravadas</field>
+        <field name="code">4.1.2.1.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4121"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41212" model="account.account.template">
+        <field name="name">Costo de Mercaderias Exentas</field>
+        <field name="code">4.1.2.1.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4121"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4122" model="account.account.template">
+        <field name="name">Costos de Servicio</field>
+        <field name="code">4.1.2.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="412"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="41221" model="account.account.template">
+        <field name="name">Costo de Servicios Gravados</field>
+        <field name="code">4.1.2.2.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4122"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="41222" model="account.account.template">
+        <field name="name">Costos de Servicio Exentos</field>
+        <field name="code">4.1.2.2.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4122"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="4123" model="account.account.template">
+        <field name="name">Costos de Bienes Industrializados</field>
+        <field name="code">4.1.2.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="412"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="41232" model="account.account.template">
+        <field name="name">Costos Directos de Produccion Gravados</field>
+        <field name="code">4.1.2.3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4123"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="41233" model="account.account.template">
+        <field name="name">Costos de Directos de Produccion Exentos</field>
+        <field name="code">4.1.2.3.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4123"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="41234" model="account.account.template">
+        <field name="name">Costos Indirectos de Produccion Gravados</field>
+        <field name="code">4.1.2.3.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4123"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="41235" model="account.account.template">
+        <field name="name">Costos Indirectos de Produccion Exentos</field>
+        <field name="code">4.1.2.3.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="4123"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="413" model="account.account.template">
+        <field name="name">Otros Ingresos</field>
+        <field name="code">4.1.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="41"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="4131" model="account.account.template">
+        <field name="name">Intereses Ganados</field>
+        <field name="code">4.1.3.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="413"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4132" model="account.account.template">
+        <field name="name">Comisiones Cobradas</field>
+        <field name="code">4.1.3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="413"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4133" model="account.account.template">
+        <field name="name">Descuentos Obtenidos</field>
+        <field name="code">4.1.3.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="413"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4134" model="account.account.template">
+        <field name="name">Subvenciones</field>
+        <field name="code">4.1.3.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="413"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4135" model="account.account.template">
+        <field name="name">Diferencias de Cambios</field>
+        <field name="code">4.1.3.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="413"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="4139" model="account.account.template">
+        <field name="name">Utilidades Varias</field>
+        <field name="code">4.1.3.9</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="413"/>
+        <field ref="account.data_account_type_revenue" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5" model="account.account.template">
+        <field name="name">Egresos</field>
+        <field name="code">5</field>
+        <field name="reconcile" eval="True"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51" model="account.account.template">
+        <field name="name">Gastos Actividad Comercial</field>
+        <field name="code">5.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="5"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="511" model="account.account.template">
+        <field name="name">Gastos de Operaciones</field>
+        <field name="code">5.1.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="51"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5111" model="account.account.template">
+        <field name="name">Sueldos y Jornales</field>
+        <field name="code">5.1.1.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5112" model="account.account.template">
+        <field name="name">Comisiones Pagadas</field>
+        <field name="code">5.1.1.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5113" model="account.account.template">
+        <field name="name">Aguinaldos</field>
+        <field name="code">5.1.1.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5114" model="account.account.template">
+        <field name="name">Aporte Patronal al IPS</field>
+        <field name="code">5.1.1.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5115" model="account.account.template">
+        <field name="name">Bonificacion Familiar</field>
+        <field name="code">5.1.1.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5116" model="account.account.template">
+        <field name="name">Vacaciones</field>
+        <field name="code">5.1.1.6</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5117" model="account.account.template">
+        <field name="name">Indemnizaciones y Preavisos</field>
+        <field name="code">5.1.1.7</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5118" model="account.account.template">
+        <field name="name">Servicios de Terceros</field>
+        <field name="code">5.1.1.8</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5119" model="account.account.template">
+        <field name="name">Honorarios Profesionales</field>
+        <field name="code">5.1.1.9</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51110" model="account.account.template">
+        <field name="name">Otros Servicios Profesionales</field>
+        <field name="code">5.1.1.10</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51111" model="account.account.template">
+        <field name="name">Luz, Agua y Comunicaciones</field>
+        <field name="code">5.1.1.11</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51112" model="account.account.template">
+        <field name="name">Papeles, Utiles e Impresos</field>
+        <field name="code">5.1.1.12</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51113" model="account.account.template">
+        <field name="name">Patentes, Impuestos y Tasas</field>
+        <field name="code">5.1.1.13</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51114" model="account.account.template">
+        <field name="name">Capacitacion del Personal</field>
+        <field name="code">5.1.1.14</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51115" model="account.account.template">
+        <field name="name">Uniformes del Personal</field>
+        <field name="code">5.1.1.15</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51116" model="account.account.template">
+        <field name="name">Combustibles y Lubricantes</field>
+        <field name="code">5.1.1.16</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51117" model="account.account.template">
+        <field name="name">Reparaciones y Mantenimientos Bienes de Uso</field>
+        <field name="code">5.1.1.17</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51118" model="account.account.template">
+        <field name="name">Fletes Pagados</field>
+        <field name="code">5.1.1.18</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51119" model="account.account.template">
+        <field name="name">Servicios de Vigilancia</field>
+        <field name="code">5.1.1.19</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51120" model="account.account.template">
+        <field name="name">Alquileres Pagados</field>
+        <field name="code">5.1.1.20</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51121" model="account.account.template">
+        <field name="name">Seguros Pagados</field>
+        <field name="code">5.1.1.21</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51130" model="account.account.template">
+        <field name="name">Gastos Varios</field>
+        <field name="code">5.1.1.30</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51131" model="account.account.template">
+        <field name="name">Compras de Mercaderías</field>
+        <field name="code">5.1.1.31</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="511"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="512" model="account.account.template">
+        <field name="name">Gastos de Ventas</field>
+        <field name="code">5.1.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="51"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5121" model="account.account.template">
+        <field name="name">Sueldos y Jornales</field>
+        <field name="code">5.1.2.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="5122" model="account.account.template">
+        <field name="name">Comisiones Pagadas</field>
+        <field name="code">5.1.2.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="5123" model="account.account.template">
+        <field name="name">Aguinaldos</field>
+        <field name="code">5.1.2.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="5124" model="account.account.template">
+        <field name="name">Aporte Patronal al IPS</field>
+        <field name="code">5.1.2.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="5125" model="account.account.template">
+        <field name="name">Bonificacion Familiar</field>
+        <field name="code">5.1.2.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="5126" model="account.account.template">
+        <field name="name">Vacaciones</field>
+        <field name="code">5.1.2.6</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="5127" model="account.account.template">
+        <field name="name">Indemnizaciones y Preavisos</field>
+        <field name="code">5.1.2.7</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="5128" model="account.account.template">
+        <field name="name">Servicios de Terceros</field>
+        <field name="code">5.1.2.8</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="5129" model="account.account.template">
+        <field name="name">Honorarios Profesionales</field>
+        <field name="code">5.1.2.9</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51210" model="account.account.template">
+        <field name="name">Otros Servicios Personales</field>
+        <field name="code">5.1.2.10</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51211" model="account.account.template">
+        <field name="name">Luz, Agua y Comunicaciones</field>
+        <field name="code">5.1.2.11</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51212" model="account.account.template">
+        <field name="name">Papeles, Utiles e Impresos</field>
+        <field name="code">5.1.2.12</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51213" model="account.account.template">
+        <field name="name">Patentes, Impuestos y Tasas</field>
+        <field name="code">5.1.2.13</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51214" model="account.account.template">
+        <field name="name">Capacitacion del Personal</field>
+        <field name="code">5.1.2.14</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51215" model="account.account.template">
+        <field name="name">Uniformes del Personal</field>
+        <field name="code">5.1.2.15</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51216" model="account.account.template">
+        <field name="name">Combustibles y Lubricantes</field>
+        <field name="code">5.1.2.16</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51217" model="account.account.template">
+        <field name="name">Reparaciones y Mantenimientos Bienes de Uso</field>
+        <field name="code">5.1.2.17</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51218" model="account.account.template">
+        <field name="name">Fletes Pagados</field>
+        <field name="code">5.1.2.18</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51219" model="account.account.template">
+        <field name="name">Servicios de Vigilancia</field>
+        <field name="code">5.1.2.19</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51220" model="account.account.template">
+        <field name="name">Alquileres Pagados</field>
+        <field name="code">5.1.2.20</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51221" model="account.account.template">
+        <field name="name">Seguros Pagados</field>
+        <field name="code">5.1.2.21</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51222" model="account.account.template">
+        <field name="name">Promocion de Ventas</field>
+        <field name="code">5.1.2.22</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51223" model="account.account.template">
+        <field name="name">Publicidad y Propaganda</field>
+        <field name="code">5.1.2.23</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51224" model="account.account.template">
+        <field name="name">Cuentas Incobrables</field>
+        <field name="code">5.1.2.24</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="51230" model="account.account.template">
+        <field name="name">Gastos Varios</field>
+        <field name="code">5.1.2.30</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="512"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+
+    <record id="513" model="account.account.template">
+        <field name="name">Gastos de Administracion</field>
+        <field name="code">5.1.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="51"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5131" model="account.account.template">
+        <field name="name">Sueldos y Jornales</field>
+        <field name="code">5.1.3.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="5132" model="account.account.template">
+        <field name="name">Comisiones Pagadas</field>
+        <field name="code">5.1.3.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="5133" model="account.account.template">
+        <field name="name">Aguinaldos</field>
+        <field name="code">5.1.3.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="5134" model="account.account.template">
+        <field name="name">Aporte Patronal al IPS</field>
+        <field name="code">5.1.3.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="5135" model="account.account.template">
+        <field name="name">Bonificacion Familiar</field>
+        <field name="code">5.1.3.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="5136" model="account.account.template">
+        <field name="name">Vacaciones</field>
+        <field name="code">5.1.3.6</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="5137" model="account.account.template">
+        <field name="name">Indemnizaciones y Preavisos</field>
+        <field name="code">5.1.3.7</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="5138" model="account.account.template">
+        <field name="name">Servicios de Terceros</field>
+        <field name="code">5.1.3.8</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="5139" model="account.account.template">
+        <field name="name">Honorarios Profesionales</field>
+        <field name="code">5.1.3.9</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="51310" model="account.account.template">
+        <field name="name">Otros servicios Personales</field>
+        <field name="code">5.1.3.10</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="51311" model="account.account.template">
+        <field name="name">Luz, Agua y Comunicaciones</field>
+        <field name="code">5.1.3.11</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="51312" model="account.account.template">
+        <field name="name">Papeles, Utiles e Impresos</field>
+        <field name="code">5.1.3.12</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="51313" model="account.account.template">
+        <field name="name">Patentes, Impuestos y Tasas</field>
+        <field name="code">5.1.3.13</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="51314" model="account.account.template">
+        <field name="name">Capacitacion del Personal</field>
+        <field name="code">5.1.3.14</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="51315" model="account.account.template">
+        <field name="name">Uniformes del Personal</field>
+        <field name="code">5.1.3.15</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+     <record id="51316" model="account.account.template">
+        <field name="name">Combustibles y Lubricantes</field>
+        <field name="code">5.1.3.16</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51317" model="account.account.template">
+        <field name="name">Reparaciones y Mantenimientos Bienes de Uso</field>
+        <field name="code">5.1.3.17</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51318" model="account.account.template">
+        <field name="name">Fletes Pagados</field>
+        <field name="code">5.1.3.18</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51319" model="account.account.template">
+        <field name="name">Servicios de Vigilancia</field>
+        <field name="code">5.1.3.19</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51320" model="account.account.template">
+        <field name="name">Alquileres Pagados</field>
+        <field name="code">5.1.3.20</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51321" model="account.account.template">
+        <field name="name">Seguros Pagados</field>
+        <field name="code">5.1.3.21</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51322" model="account.account.template">
+        <field name="name">Remuneracion Directores</field>
+        <field name="code">5.1.3.22</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51323" model="account.account.template">
+        <field name="name">Remuneracion Gerentes</field>
+        <field name="code">5.1.3.23</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51324" model="account.account.template">
+        <field name="name">Cuentas Incobrables</field>
+        <field name="code">5.1.3.24</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51330" model="account.account.template">
+        <field name="name">Gastos Varios</field>
+        <field name="code">5.1.3.30</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="51331" model="account.account.template">
+        <field name="name">Aportes y Cuotas Sociales</field>
+        <field name="code">5.1.3.31</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="513"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="514" model="account.account.template">
+        <field name="name">Gastos Bancarios y Financieros</field>
+        <field name="code">5.1.4</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="51"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5141" model="account.account.template">
+        <field name="name">Intereses Pagados</field>
+        <field name="code">5.1.4.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="514"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5142" model="account.account.template">
+        <field name="name">Gastos Bancarios</field>
+        <field name="code">5.1.4.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="514"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5143" model="account.account.template">
+        <field name="name">Diferencias de Cambios</field>
+        <field name="code">5.1.4.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="514"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="515" model="account.account.template">
+        <field name="name">Depreciaciones y Amortizaciones</field>
+        <field name="code">5.1.5</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="51"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5151" model="account.account.template">
+        <field name="name">Depreciaciones del Ejercicio</field>
+        <field name="code">5.1.5.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="515"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5152" model="account.account.template">
+        <field name="name">Amortizaciones del Ejercicio</field>
+        <field name="code">5.1.5.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="515"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="516" model="account.account.template">
+        <field name="name">Otros Resultados No Operativos</field>
+        <field name="code">5.1.6</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="51"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5161" model="account.account.template">
+        <field name="name">Utilidad/Perdida en Venta de Activos Fijos</field>
+        <field name="code">5.1.6.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="516"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5162" model="account.account.template">
+        <field name="name">Utilidad/Perdida en Venta de Inversiones</field>
+        <field name="code">5.1.6.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="516"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5163" model="account.account.template">
+        <field name="name">Cuentas Incobrables Recuperadas</field>
+        <field name="code">5.1.6.3</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="516"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="517" model="account.account.template">
+        <field name="name">Gastos No Deducibles</field>
+        <field name="code">5.1.7</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="51"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5171" model="account.account.template">
+        <field name="name">Inpuestos, Recargos y Multas</field>
+        <field name="code">5.1.7.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="517"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5172" model="account.account.template">
+        <field name="name">Gastos Varios</field>
+        <field name="code">5.1.7.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="514"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="518" model="account.account.template">
+        <field name="name">Impuestos y Reservas</field>
+        <field name="code">5.1.8</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="51"/>
+        <field ref="account_parent.data_account_type_view" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5181" model="account.account.template">
+        <field name="name">Impuesto a la Renta</field>
+        <field name="code">5.1.8.1</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="518"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="5182" model="account.account.template">
+        <field name="name">Reserva Legal</field>
+        <field name="code">5.1.8.2</field>
+        <field name="reconcile" eval="True"/>
+        <field name="parent_id" ref="518"/>
+        <field ref="account.data_account_type_expenses" name="user_type_id"/>
+        <field name="chart_template_id" ref="py_chart_template"/>
+    </record>
+
+    <record id="py_chart_template" model="account.chart.template">
+        <field name="property_account_receivable_id" ref="1131"/>
+        <field name="property_account_payable_id" ref="2111"/>
+        <field name="property_account_expense_categ_id" ref="51131"/>
+        <field name="property_account_income_categ_id" ref="41121"/>
+        <field name="expense_currency_exchange_account_id" ref="5143"/>
+        <field name="income_currency_exchange_account_id" ref="4135"/>
+    </record>
+
+</odoo>
