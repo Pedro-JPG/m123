@@ -29,7 +29,7 @@ from openerp.osv import fields, osv
 from openerp import api
 
 
-import ipdb as pdb
+#import ipdb as pdb
 
 class res_partner(osv.osv):
     _name = 'res.partner'

@@ -3,7 +3,7 @@ from openerp import api, models, exceptions, fields
 from openerp.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 import locale
 import time
-import ipdb as pdb
+#import ipdb as pdb
 
 class account_invoice(models.Model):
     _inherit = 'account.invoice'

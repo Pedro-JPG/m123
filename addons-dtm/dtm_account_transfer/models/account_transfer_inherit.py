@@ -4,7 +4,7 @@ from openerp.tools.translate import _
 from decimal import Decimal
 import openerp.addons.decimal_precision as dp
 import time
-import ipdb as pdb
+#import ipdb as pdb
 
 
 class account_transfer_inherit(models.Model):

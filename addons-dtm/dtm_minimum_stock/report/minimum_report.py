@@ -1,5 +1,5 @@
 from openerp import api, models
-import ipdb as pdb
+# import ipdb as pdb
 
 class ParticularReport(models.AbstractModel):
     _inherit = 'report.abstract_report'

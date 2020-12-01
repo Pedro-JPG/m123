@@ -7,7 +7,7 @@ from openerp.tools.translate import _
 from datetime import datetime, date
 from openerp import SUPERUSER_ID
 import logging
-import ipdb as pdb
+# import ipdb as pdb
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 _logger = logging.getLogger(__name__)
 from openerp.exceptions import Warning

@@ -8,7 +8,7 @@ from openerp.tools.translate import _
 from datetime import datetime, date
 from openerp import SUPERUSER_ID
 import logging
-import ipdb as pdb
+#import ipdb as pdb
 
 _logger = logging.getLogger(__name__)
 

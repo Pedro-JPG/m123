@@ -3,7 +3,7 @@ from openerp import models, fields, _, api, exceptions
 from openerp.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 import locale
 import time
-import ipdb as pdb
+#import ipdb as pdb
 from openerp.exceptions import Warning
 
 

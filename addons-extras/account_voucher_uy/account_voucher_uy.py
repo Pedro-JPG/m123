@@ -21,7 +21,7 @@
 
 from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
-import ipdb as pdb
+# import ipdb as pdb
 
 class account_voucher_uy(models.Model):
 

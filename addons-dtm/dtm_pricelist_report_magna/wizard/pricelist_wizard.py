@@ -7,7 +7,7 @@ from openerp.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 from openerp.modules import get_module_path
 from openerp.http import request
 from openerp.addons.web.controllers.main import serialize_exception, content_disposition
-import ipdb as pdb
+# import ipdb as pdb
 import unicodedata
 import codecs
 import locale

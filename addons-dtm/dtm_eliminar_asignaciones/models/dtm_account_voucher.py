@@ -4,7 +4,7 @@ from openerp.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 import locale
 import time
 import logging
-import ipdb as pdb
+#import ipdb as pdb
 from openerp.exceptions import Warning
 import collections
 _logger = logging.getLogger(__name__)

@@ -28,7 +28,7 @@
 import locale
 import time
 from openerp.tools.misc import DEFAULT_SERVER_DATE_FORMAT
-import ipdb as pdb
+#import ipdb as pdb
 
 
 class Formatters:

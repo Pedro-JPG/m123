@@ -13,7 +13,7 @@ from openerp.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 from qrcode import *
 import tempfile
 import base64
-import ipdb as pdb
+#import ipdb as pdb
 from datetime import date, timedelta
 from ..library import formatters
 

@@ -24,7 +24,7 @@
 
 from datetime import timedelta
 #from openerp import models, fields, api, exceptions
-import ipdb as pdb
+# import ipdb as pdb
 import datetime
 
 from openerp import models, fields, api, exceptions, _

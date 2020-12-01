@@ -2,7 +2,7 @@
 
 
 from openerp import api, fields, models
-import ipdb as pdb
+#import ipdb as pdb
 
 class res_partner(models.Model):
     _inherit = 'res.partner'

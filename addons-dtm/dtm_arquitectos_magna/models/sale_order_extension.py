@@ -2,7 +2,7 @@
 
 
 from openerp import api, fields, models
-import ipdb as pdb
+#import ipdb as pdb
 
 class sale_order(models.Model):
     _inherit = 'sale.order'
