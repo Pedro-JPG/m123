@@ -1,0 +1,794 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* purchase
+#	* account
+#	* product
+#	* base
+#	* stock_account
+#	* sale_stock
+#	* stock
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20151214\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-18 18:59+0000\n"
+"PO-Revision-Date: 2016-02-18 18:59+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base
+#: model:ir.module.module,description:base.module_sale_order_dates
+msgid "\n"
+"Add additional date information to the sales order.\n"
+"===================================================\n"
+"\n"
+"You can add the following additional dates to a sales order:\n"
+"------------------------------------------------------------\n"
+"    * Requested Date (will be used as the expected date on pickings)\n"
+"    * Commitment Date\n"
+"    * Effective Date\n"
+""
+msgstr "\n"
+"Añade información de fechas para los pedidos de ventas\n"
+"======================================================\n"
+"\n"
+"Puede añadir las siguientes fechas a los pedidos de ventas\n"
+"----------------------------------------------------------\n"
+"    * Fecha de solicitud (se utilizará como la fecha prevista en remitos)\n"
+"    * Fecha de recogida\n"
+"    * Fecha efectiva\n"
+""
+
+#. module: base
+#: model:ir.module.module,description:base.module_delivery
+msgid "\n"
+"Allows you to add delivery methods in sale orders and picking.\n"
+"==============================================================\n"
+"\n"
+"You can define your own carrier and delivery grids for prices. When creating \n"
+"invoices from picking, OpenERP is able to add and compute the shipping line.\n"
+""
+msgstr "\n"
+"Permite añadir métodos de envío en los pedidos de venta y en los remitos.\n"
+"==============================================================\n"
+"\n"
+"Puede definir su propio transportista y sus tarifas de envío. Cuando se creen facturas desde el remito, OpenERP podrá añadir y calcular la línea de envío.\n"
+""
+
+#. module: base
+#: model:ir.module.module,description:base.module_stock_landed_costs
+msgid "\n"
+"Landed Costs Management\n"
+"=======================\n"
+"This module allows you to easily add extra costs on pickings and decide the split of these costs among their stock moves in order to take them into account in your stock valuation.\n"
+"    "
+msgstr "\n"
+"Gestión de costes en destino\n"
+"============================\n"
+"\n"
+"Este módulo le permite añadir fácilmente costes extra en los remitos y decidir el reparto de estos costes entre los movimientos de existencia para tenerlo en cuenta en la valoración de existencias.\n"
+"    "
+
+#. module: base
+#: model:ir.module.module,description:base.module_stock_dropshipping
+msgid "\n"
+"Manage drop shipping orders\n"
+"===========================\n"
+"\n"
+"This module adds a pre-configured Drop Shipping picking type\n"
+"as well as a procurement route that allow configuring Drop\n"
+"Shipping products and orders.\n"
+"\n"
+"When drop shipping is used the goods are directly transferred\n"
+"from suppliers to customers (direct delivery) without\n"
+"going through the retailer's warehouse. In this case no\n"
+"internal transfer document is needed.\n"
+"\n"
+""
+msgstr "\n"
+"Gestionar pedidos drop shipping\n"
+"===============================\n"
+"\n"
+"Este módulo añade un tipo de remito preconfigurado llamado Dropshipping,\n"
+"así como una ruta de abastecimiento, que permite configurar productos y \n"
+"pedidos drop shippings \n"
+"\n"
+"Cuando se utiliza dropshipping, los bienes se transfieren directamente desde\n"
+"los proveedores a los clientes (envío directo) sin pasar por el almacén del\n"
+"distribuidor. En este caso, no se requiere de un documento de transferencia\n"
+"interna.\n"
+"\n"
+""
+
+#. module: base
+#: model:ir.module.module,description:base.module_sale
+msgid "\n"
+"Manage sales quotations and orders\n"
+"==================================\n"
+"\n"
+"This application allows you to manage your sales goals in an effective and efficient manner by keeping track of all sales orders and history.\n"
+"\n"
+"It handles the full sales workflow:\n"
+"\n"
+"* **Quotation** -> **Sales order** -> **Invoice**\n"
+"\n"
+"Preferences (only with Warehouse Management installed)\n"
+"------------------------------------------------------\n"
+"\n"
+"If you also installed the Warehouse Management, you can deal with the following preferences:\n"
+"\n"
+"* Shipping: Choice of delivery at once or partial delivery\n"
+"* Invoicing: choose how invoices will be paid\n"
+"* Incoterms: International Commercial terms\n"
+"\n"
+"You can choose flexible invoicing methods:\n"
+"\n"
+"* *On Demand*: Invoices are created manually from Sales Orders when needed\n"
+"* *On Delivery Order*: Invoices are generated from picking (delivery)\n"
+"* *Before Delivery*: A Draft invoice is created and must be paid before delivery\n"
+"\n"
+"\n"
+"The Dashboard for the Sales Manager will include\n"
+"------------------------------------------------\n"
+"* My Quotations\n"
+"* Monthly Turnover (Graph)\n"
+"    "
+msgstr "\n"
+"Gestiona presupuestos y pedidos de venta\n"
+"==================================\n"
+"\n"
+"Esta aplicación permite gestionar los objetivos de venta de una manera eficiente y eficaz siguiendo todos los pedidos de venta y su historial.\n"
+"\n"
+"Maneja el flujo completo de ventas:\n"
+"\n"
+"* **Presupuesto** -> **Pedido de venta** -> **Factura**\n"
+"\n"
+"Preferencias (sólo con la gestión de almacenes instalada)\n"
+"-----------------------------------------------------------------------------------------\n"
+"\n"
+"Si también tiene instalada la gestión de almacenes, puede gestionar las siguientes preferencias:\n"
+"\n"
+"* Envío: Elección de envío total o parcial\n"
+"* Facturación: Escoja cómo serán pagadas las facturas\n"
+"* Incoterms: Términos de comercio internacional\n"
+"\n"
+"Puede elegir métodos de facturación flexibles:\n"
+"\n"
+"* 'Bajo demanda': Las facturas se crean manualmente desde los pedidos de venta cuando sean necesarias.\n"
+"* 'Con la orden de entrega': Las facturas se generan desde el remito (entrega).\n"
+"* 'Antes del envío': Se crea una factura borrador y debe ser pagada antes del envío.\n"
+"\n"
+"El tablero para el responsable de compras incluye\n"
+"----------------------------------------------------------------------------\n"
+"* Mis presupuestos\n"
+"* Volumen de negocios mensual (Gráfico)\n"
+"    "
+
+#. module: base
+#: model:ir.module.module,description:base.module_sale_stock
+msgid "\n"
+"Manage sales quotations and orders\n"
+"==================================\n"
+"\n"
+"This module makes the link between the sales and warehouses management applications.\n"
+"\n"
+"Preferences\n"
+"-----------\n"
+"* Shipping: Choice of delivery at once or partial delivery\n"
+"* Invoicing: choose how invoices will be paid\n"
+"* Incoterms: International Commercial terms\n"
+"\n"
+"You can choose flexible invoicing methods:\n"
+"\n"
+"* *On Demand*: Invoices are created manually from Sales Orders when needed\n"
+"* *On Delivery Order*: Invoices are generated from picking (delivery)\n"
+"* *Before Delivery*: A Draft invoice is created and must be paid before delivery\n"
+""
+msgstr "\n"
+"Gestione presupuestos y pedidos de venta\n"
+"==================================\n"
+"\n"
+"Este módulo enlaza las aplicaciones de ventas y gestión de almacenes.\n"
+"\n"
+"Preferencias\n"
+"----------------------\n"
+"* Envío: Elección de envío total o parcial\n"
+"* Facturación: escoja cómo serán pagadas las facturas\n"
+"* Incoterms: Formas de pago internacionales\n"
+"\n"
+"Puede elegir métodos de facturación flexibles:\n"
+"\n"
+"* 'Bajo demanda': Las facturas se crean manualmente desde los pedidos de venta cuando sean necesarias.\n"
+"* 'Con la orden de entrega': Las facturas se generan desde el remito (entrega).\n"
+"* 'Antes del envío': Se crea una factura borrador y debe ser pagada antes del envío.\n"
+""
+
+#. module: base
+#: model:ir.module.module,description:base.module_sale_journal
+msgid "\n"
+"The sales journal modules allows you to categorise your sales and deliveries (picking lists) between different journals.\n"
+"========================================================================================================================\n"
+"\n"
+"This module is very helpful for bigger companies that works by departments.\n"
+"\n"
+"You can use journal for different purposes, some examples:\n"
+"----------------------------------------------------------\n"
+"    * isolate sales of different departments\n"
+"    * journals for deliveries by truck or by UPS\n"
+"\n"
+"Journals have a responsible and evolves between different status:\n"
+"-----------------------------------------------------------------\n"
+"    * draft, open, cancel, done.\n"
+"\n"
+"Batch operations can be processed on the different journals to confirm all sales\n"
+"at once, to validate or invoice packing.\n"
+"\n"
+"It also supports batch invoicing methods that can be configured by partners and sales orders, examples:\n"
+"-------------------------------------------------------------------------------------------------------\n"
+"    * daily invoicing\n"
+"    * monthly invoicing\n"
+"\n"
+"Some statistics by journals are provided.\n"
+"    "
+msgstr "\n"
+"El módulo de diario de ventas permite categorizar sus ventas y entregas (remitos) entre diferentes diarios.\n"
+"========================================================================================\n"
+"\n"
+"Este módulo es muy útil para compañías grandes que trabajan por departamentos.\n"
+"\n"
+"Puede usar un diario para diversos propósitos. Por ejemplo:\n"
+"-------------------------------------------------------------------------------------------------\n"
+"    * separar ventas de varios departamentos\n"
+"    * diarios para entregas por camión o por UPS\n"
+"\n"
+"Los diarios tienen un responsables y evolucionan entre diferentes estados:\n"
+"------------------------------------------------------------------------------------------------------------------------\n"
+"    * borrador, abierto, cancelado, realizado.\n"
+"\n"
+"Se pueden procesar operaciones en lote en los diferentes diarios para confirmar todas las ventas de una, validarlas o realizar facturación empaquetada.\n"
+"\n"
+"También soporta métodos de facturación en lote que puede ser configurados por empresas y pedidos de venta. Ejemplos:\n"
+"-------------------------------------------------------------------------------------------------------\n"
+"    * facturación diaria\n"
+"    * facturación mensual\n"
+"\n"
+"Se proveen algunas estadísticas por diarios.\n"
+"    "
+
+#. module: base
+#: model:ir.module.module,description:base.module_stock_picking_wave
+msgid "\n"
+"This module adds the picking wave option in warehouse management.\n"
+"=================================================================\n"
+"    "
+msgstr "\n"
+"Este módulo añade la opción de grupos de remitos en la gestión de almacén\n"
+"===========================================================================\n"
+"    "
+
+#. module: base
+#: model:ir.module.module,description:base.module_procurement_jit
+msgid "\n"
+"This module allows Just In Time computation of procurement orders.\n"
+"==================================================================\n"
+"\n"
+"If you install this module, you will not have to run the regular procurement\n"
+"scheduler anymore (but you still need to run the minimum order point rule\n"
+"scheduler, or for example let it run daily).\n"
+"All procurement orders will be processed immediately, which could in some\n"
+"cases entail a small performance impact.\n"
+"\n"
+"It may also increase your stock size because products are reserved as soon\n"
+"as possible and the scheduler time range is not taken into account anymore.\n"
+"In that case, you can not use priorities any more on the different picking.\n"
+"    "
+msgstr "\n"
+"Este módulo permite el cálculo en tiempo real de las órdenes de abastecimiento.\n"
+"==================================================================\n"
+"\n"
+"Si instala este módulo, no tendrá que ejecutar el planificador de abastecimiento más (pero aún necesita ejecutar el planificador de la regla de punto de pedido mínimo, o por ejemplo dejar que se ejecute diariamente).\n"
+"\n"
+"Todas las órdenes de abastecimiento se procesarán inmediatamente, lo que puede en algunos casos suponer un pequeño impacto en el rendimiento.\n"
+"\n"
+"También puede aumentar el tamaño de stock, ya que los productos son reservados tan pronto como es posible, y el intervalo de tiempo del planificador no se tiene en cuenta más. En ese caso, no puede usar prioridades en los diferentes remitos.\n"
+"    "
+
+#. module: base
+#: model:ir.module.module,description:base.module_stock_account
+msgid "\n"
+"WMS Accounting module\n"
+"======================\n"
+"This module makes the link between the 'stock' and 'account' modules and allows you to create accounting entries to value your stock movements\n"
+"\n"
+"Key Features\n"
+"------------\n"
+"* Stock Valuation (periodical or automatic)\n"
+"* Invoice from Picking\n"
+"\n"
+"Dashboard / Reports for Warehouse Management includes:\n"
+"------------------------------------------------------\n"
+"* Stock Inventory Value at given date (support dates in the past)\n"
+"    "
+msgstr "\n"
+"Módulo de contabilidad del SGA\n"
+"==============================\n"
+"Este módulo sirve de puente entre los módulos 'stock' y 'account' y le permite crear asientos contables para valorar los movimientos de existencias.\n"
+"\n"
+"Características clave\n"
+"------------\n"
+"* Valoración de existencias (periódica o automática)\n"
+"* Facturación desde remito\n"
+"\n"
+"El tablero / los informes para la gestión de almacén incluye:\n"
+"-------------------------------------------------------------\n"
+"* Valoración de existencias en una fecha dada (soporta fechas en el pasado)\n"
+"    "
+
+#. module: stock
+#: code:addons/stock/stock.py:3386
+#: code:addons/stock/stock.py:3663
+#, python-format
+msgid " Sequence picking"
+msgstr " Secuencia de remito"
+
+#. module: stock
+#: model:ir.actions.act_window,help:stock.action_deliver_move
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to add a delivery order for this product.\n"
+"              </p><p>\n"
+"                Here you will find the history of all past deliveries related to\n"
+"                this product, as well as all the products you must deliver to\n"
+"                customers.\n"
+"              </p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"Pulse para añadir un remito de salida para este producto.\n"
+"</p><p>\n"
+"Aquí podrá encontrar el historial de todos los remitos pasados relativos a este producto, así como todos los productos que debe entregar a los clientes.\n"
+"</p>\n"
+"            "
+
+#. module: stock
+#: model:ir.actions.act_window,help:stock.action_picking_type_form
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create a new picking type. \n"
+"              </p><p>\n"
+"                The picking type system allows you to assign each stock\n"
+"                operation a specific type which will alter its views accordingly.  \n"
+"                On the picking type you could e.g. specify if packing is needed by default, \n"
+"                if it should show the customer.  \n"
+"              </p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"Pulse para crear un nuevo tipo de remito.\n"
+"</p><p>\n"
+"El sistema de tipos de remito le permite asignar a cada operación\n"
+"de existencias un tipo específico que modificará sus vistas acorde \n"
+"con él. En el tipo de remito puede especificar por ejemplo si se \n"
+"necesita realizar un empaquetado por defecto, si debe mostrar el\n"
+"cliente, etc.\n"
+"</p>\n"
+"            "
+
+#. module: account
+#: model:ir.actions.act_window,help:account.action_invoice_tree2
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to record a new supplier invoice.\n"
+"              </p><p>\n"
+"                You can control the invoice from your supplier according to\n"
+"                what you purchased or received. Odoo can also generate\n"
+"                draft invoices automatically from purchase orders or receipts.\n"
+"              </p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"Pulse para registrar una nueva factura de proveedor.\n"
+"</p><p>\n"
+"Puede controlar una factura de proveedor conforme a los que haya comprado o recibido. Odoo puede generar también facturas en estado borrador automáticamente desde las órdenes de compra o remitos de recepción.\n"
+"</p>\n"
+"            "
+
+#. module: stock
+#: model:ir.actions.act_window,help:stock.action_receipt_picking_move
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                Click to register a product receipt. \n"
+"              </p><p>\n"
+"                Here you can receive individual products, no matter what\n"
+"                purchase order or picking order they come from. You will find\n"
+"                the list of all products you are waiting for. Once you receive\n"
+"                an order, you can filter based on the name of the supplier or\n"
+"                the purchase order reference. Then you can confirm all products\n"
+"                received using the buttons on the right of each line.\n"
+"              </p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"Pulse para registrar una recepción de producto.\n"
+"</p><p>\n"
+"Aquí puede recibir productos individuales, no importa de qué pedido de compra o de \n"
+"qué remito provengan. Encontrará la lista de todos los productos que están es espera. \n"
+"Una vez reciba el pedido, puede realizar un filtro basado en el nombre del proveedor \n"
+"o la referencia del pedido de venta. Puede confirmar entonces todos los productos \n"
+"recibidos usando los botones a la derecha de cada línea.\n"
+"</p>\n"
+"            "
+
+#. module: stock
+#. openerp-web
+#: code:addons/stock/static/src/js/widgets.js:656
+#, python-format
+msgid "<p>We could not find a picking to display.</p>"
+msgstr "<p>No se ha encontrado ningún remito que mostrar.</p>"
+
+#. module: product
+#: help:product.template,description_sale:0
+msgid "A description of the Product that you want to communicate to your customers. This description will be copied to every Sale Order, Delivery Order and Customer Invoice/Refund"
+msgstr "Una descripción del producto que quiera comunicar a sus clientes. Esta descripción se copiará a cada pedido de venta, remito de salida y factura de cliente."
+
+#. module: stock
+#: help:stock.config.settings,module_claim_from_delivery:0
+msgid "Adds a Claim link to the delivery order.\n"
+"-This installs the module claim_from_delivery."
+msgstr "Añade un enlace  a reclamaciones desde el remito de envío.\n"
+"- Esto instala el módulo claim_from_delivery."
+
+#. module: sale_stock
+#: help:sale.config.settings,module_delivery:0
+msgid "Allows you to add delivery methods in sales orders and delivery orders.\n"
+"You can define your own carrier and delivery grids for prices.\n"
+"-This installs the module delivery."
+msgstr "Permite añadir métodos de envío en los pedidos de venta y remitos de envío.\n"
+"Puede definir sus propios transportistas y tablas de envío para los precios.\n"
+"- Esto instala el módulo delivery."
+
+#. module: stock_account
+#: field:stock.config.settings,module_stock_invoice_directly:0
+msgid "Create and open the invoice when the user finish a delivery order"
+msgstr "Crear y abrir la factura cuando el usuario finalice el remito de salida"
+
+#. module: sale_stock
+#: model:ir.actions.act_window,name:sale_stock.outgoing_picking_list_to_invoice
+#: model:ir.ui.menu,name:sale_stock.menu_action_picking_list_to_invoice
+msgid "Deliveries to Invoice"
+msgstr "Remitos a facturar"
+
+#. module: stock
+#: code:addons/stock/stock.py:3430
+#: model:stock.picking.type,name:stock.picking_type_out
+#, python-format
+msgid "Delivery Orders"
+msgstr "Remitos de salida"
+
+#. module: purchase
+#: help:stock.picking,reception_to_invoice:0
+msgid "Does the picking contains some moves related to a purchase order invoiceable on the receipt?"
+msgstr "¿El remito contiene algunos movimientos relativos a un pedido de compra facturable en la recepción?"
+
+#. module: product
+#: help:product.template,packaging_ids:0
+msgid "Gives the different ways to package the same product. This has no impact on the picking order and is mainly used if you use the EDI module."
+msgstr "Indica las diferentes formas de empaquetar el mismo producto. Esto no tiene ningún impacto en la preparación de remitos y se utiliza principalmente si utiliza el módulo EDI."
+
+#. module: stock
+#: view:procurement.order:stock.view_procurement_form_stock_inherit
+msgid "Group's Pickings"
+msgstr "Grupos de remitos"
+
+#. module: base
+#: model:ir.module.category,description:base.module_category_point_of_sale
+msgid "Helps you get the most out of your points of sales with fast sale encoding, simplified payment mode encoding, automatic picking lists generation and more."
+msgstr "Ayuda a sacar lo mejor de sus puntos de venta con la codificación rápida de las ventas, codificación simplificada de modos de pago, generación automática de remitos y más."
+
+#. modules: purchase, stock
+#: view:purchase.order:purchase.purchase_order_2_stock_picking
+#: field:purchase.order,shipment_count:0
+#: field:stock.warehouse,reception_steps:0
+msgid "Incoming Shipments"
+msgstr "Remitos de entrada"
+
+#. module: stock_account
+#: help:stock.config.settings,module_stock_landed_costs:0
+msgid "Install the module that allows to affect landed costs on pickings, and split them onto the different products."
+msgstr "Instala el módulo que permite imputar costes en destino en los remitos, y separarlos entre los diferentes productos."
+
+#. module: stock
+#: help:stock.config.settings,module_stock_picking_wave:0
+msgid "Install the picking wave module which will help you grouping your pickings and processing them in batch"
+msgstr "Instale el módulo de grupos de remitos para ayudarle a agrupar sus remitos y procesarlo en lote"
+
+#. module: stock
+#: field:stock.picking,move_lines:0
+msgid "Internal Moves"
+msgstr "Remitos internos"
+
+#. module: base
+#: model:ir.module.module,shortdesc:base.module_stock_invoice_directly
+msgid "Invoice Picking Directly"
+msgstr "Facturar remito directamente"
+
+#. module: sale_stock
+#: selection:sale.config.settings,default_order_policy:0
+msgid "Invoice based on deliveries"
+msgstr "Facturar desde remitos"
+
+#. module: purchase
+#: help:purchase.order,shipped:0
+msgid "It indicates that a picking has been done"
+msgstr "Indica que un remito ha sido realizado."
+
+#. module: stock
+#: field:stock.picking.type,last_done_picking:0
+msgid "Last 10 Done Pickings"
+msgstr "Últimos 10 remitos realizados"
+
+#. module: purchase
+#: code:addons/purchase/purchase.py:173
+#, python-format
+msgid "Make sure you have at least an incoming picking type defined"
+msgstr "Asegúrese de que tiene al menos un tipo de remito de entrada definido"
+
+#. module: stock
+#: field:stock.config.settings,module_stock_picking_wave:0
+msgid "Manage picking wave"
+msgstr "Gestionar grupos de remitos"
+
+#. module: stock
+#: help:stock.warehouse.orderpoint,group_id:0
+msgid "Moves created through this orderpoint will be put in this procurement group. If none is given, the moves generated by procurement rules will be grouped into one big picking."
+msgstr "Los movimientos creados por esta orden de abastecimiento serán colocados en este grupo de abastecimiento. Si no se proporciona ningún grupo, los movimientos generados por las reglas de abastecimiento serán agrupados en un gran remito."
+
+#. module: stock
+#. openerp-web
+#: code:addons/stock/static/src/js/widgets.js:649
+#, python-format
+msgid "No Picking Available"
+msgstr "No hay remito disponible"
+
+#. module: stock
+#. openerp-web
+#: code:addons/stock/static/src/xml/picking.xml:195
+#, python-format
+msgid "No picking found."
+msgstr "No se ha encontrado remito"
+
+#. module: stock_account
+#: code:addons/stock_account/wizard/stock_invoice_onshipping.py:98
+#, python-format
+msgid "None of these picking lists require invoicing."
+msgstr "Ninguno de estos remitos requiere facturación."
+
+#. module: stock
+#: field:stock.warehouse,pick_type_id:0
+msgid "Pick Type"
+msgstr "Tipo de remito"
+
+#. module: stock
+#: model:ir.actions.report.xml,name:stock.action_report_picking
+#: view:stock.move:stock.view_move_search
+#: field:stock.transfer_details,picking_id:0
+msgid "Picking"
+msgstr "Remito"
+
+#. modules: purchase, stock_account, sale_stock, stock
+#: model:ir.model,name:purchase.model_stock_picking
+#: field:purchase.order,picking_ids:0
+#: model:ir.model,name:sale_stock.model_stock_picking
+#: model:ir.model,name:stock.model_stock_picking
+#: view:stock.picking:stock.view_picking_internal_search
+#: model:ir.model,name:stock_account.model_stock_picking
+msgid "Picking List"
+msgstr "Remito"
+
+#. module: stock
+#: view:stock.picking:stock.view_picking_internal_search
+msgid "Picking Lists"
+msgstr "Remitos"
+
+#. module: stock
+#: field:procurement.rule,picking_type_id:0
+#: field:stock.move,picking_type_id:0
+#: view:stock.picking:stock.view_picking_internal_search
+#: field:stock.picking,picking_type_id:0
+#: view:stock.picking.type:stock.view_pickingtype_filter
+msgid "Picking Type"
+msgstr "Tipo de remito"
+
+#. module: stock
+#: field:stock.picking,picking_type_code:0
+msgid "Picking Type Code"
+msgstr "Código del tipo de remito"
+
+#. module: stock
+#: field:stock.picking.type,name:0
+msgid "Picking Type Name"
+msgstr "Nombre del tipo de remito"
+
+#. module: stock
+#: help:procurement.rule,picking_type_id:0
+msgid "Picking Type determines the way the picking should be shown in the view, reports, ..."
+msgstr "El tipo de remito determinar la forma en la que Remito debe ser mostrado en las vistas, informes, ..."
+
+#. module: stock
+#: field:stock.picking.type,return_picking_type_id:0
+msgid "Picking Type for Returns"
+msgstr "Tipo de remito para las devoluciones"
+
+#. module: stock
+#: view:stock.picking.type:stock.view_picking_type_form
+#: view:stock.picking.type:stock.view_picking_type_tree
+#: view:stock.warehouse:stock.view_warehouse
+msgid "Picking Types"
+msgstr "Tipos de remito"
+
+#. module: sale_stock
+#: field:sale.order,picking_ids:0
+msgid "Picking associated to this sale"
+msgstr "Remito asociado a esta venta"
+
+#. module: stock
+#: view:stock.picking:stock.vpicktree
+msgid "Picking list"
+msgstr "Remito"
+
+#. module: stock
+#: model:ir.model,name:stock.model_stock_transfer_details
+msgid "Picking wizard"
+msgstr "Asistente de remito"
+
+#. module: stock
+#: model:ir.model,name:stock.model_stock_transfer_details_items
+msgid "Picking wizard items"
+msgstr "Elementos del asistente de remito"
+
+#. module: stock
+#: view:procurement.group:stock.procurement_group_form_view_herited
+msgid "Pickings"
+msgstr "Remitos"
+
+#. module: stock
+#: view:stock.picking:stock.view_picking_internal_search
+msgid "Pickings already processed"
+msgstr "Remitos ya procesados"
+
+#. module: stock
+#: model:ir.actions.act_window,name:stock.do_view_pickings
+msgid "Pickings for Groups"
+msgstr "Remitos para grupos"
+
+#. module: stock
+#: view:stock.picking:stock.view_picking_internal_search
+msgid "Pickings that are late on scheduled time"
+msgstr "Remitos retrasados según planificación"
+
+#. module: stock
+#: view:stock.picking:stock.view_picking_form
+msgid "Print Picking List"
+msgstr "Imprimir remito"
+
+#. module: stock
+#: help:stock.picking,priority:0
+msgid "Priority for this picking. Setting manually a value here would set it as priority for all the moves"
+msgstr "Prioridad para este remito. Estableciendo manualmente un valor aquí, lo pondrá como prioridad para todos los movimientos"
+
+#. module: purchase
+#: help:purchase.order,partner_ref:0
+msgid "Reference of the sales order or bid sent by your supplier. It's mainly used to do the matching when you receive the products as this reference is usually written on the delivery order sent by your supplier."
+msgstr "Referencia del pedido de ventas o licitación enviada a su proveedor. Se usa principalmente para realizar el casamiento cuando recibe los productos, ya que esta referencia se suele escribir en el remito enviado por su proveedor."
+
+#. module: stock
+#: view:stock.picking:stock.view_picking_internal_search
+msgid "Remaining parts of picking partially processed"
+msgstr "Partes restantes del remito parcialmente procesado"
+
+#. modules: stock_account, stock
+#: model:ir.model,name:stock.model_stock_return_picking
+#: model:ir.model,name:stock_account.model_stock_return_picking
+msgid "Return Picking"
+msgstr "Devolver remito"
+
+#. module: stock
+#: view:stock.return.picking.line:stock.stock_return_line_form_in
+msgid "Return Picking Memory"
+msgstr "Memoría de remito de devolución"
+
+#. module: stock
+#: code:addons/stock/wizard/stock_return_picking.py:191
+#, python-format
+msgid "Returned Picking"
+msgstr "Remito devuelto"
+
+#. module: stock
+#. openerp-web
+#: code:addons/stock/static/src/xml/picking.xml:226
+#, python-format
+msgid "Scanned picking could not be found"
+msgstr "El remito escaneado no puede ser encontrado"
+
+#. module: stock
+#: field:stock.pack.operation,picking_id:0
+msgid "Stock Picking"
+msgstr "Remito"
+
+#. module: stock
+#: help:stock.picking,picking_type_code:0
+msgid "Technical field used to display the correct label on print button in the picking view"
+msgstr "Campo técnico usado para mostrar la etiqueta correcta en el botón de imprimir en la vista de remito"
+
+#. module: stock
+#: help:stock.move,price_unit:0
+msgid "Technical field used to record the product cost set by the user during a picking confirmation (when costing method used is 'average price' or 'real'). Value given in company currency and in product uom."
+msgstr "Campo técnico usado para registrar el coste de un producto establecido por el usuario durante la confirmación del remito (cuando el método de coste usado es 'precio medio' o 'real'). El valor viene dado en la moneda de la compañía y en la UdM del producto."
+
+#. module: stock
+#: model:ir.model,name:stock.model_stock_picking_type
+msgid "The picking type determines the picking view"
+msgstr "El tipo de remito determina la vista de Remito"
+
+#. module: stock
+#: code:addons/stock/stock.py:2442
+#, python-format
+msgid "The roundings of your Unit of Measures %s on the move vs. %s on the product don't allow to do these operations or you are not transferring the picking at once. "
+msgstr "El redondeo de su unidad de medida %s en el movimientos vs. %s en el producto no permite realizar esta operaciones o no está transfiriendo el remito de una vez. "
+
+#. module: stock
+#: code:addons/stock/stock.py:1071
+#, python-format
+msgid "The source location must be the same for all the moves of the picking."
+msgstr "La ubicación origen debe ser la misma para todos los movimientos del remito."
+
+#. module: stock
+#: help:stock.config.settings,group_stock_production_lot:0
+msgid "This allows you to assign a lot (or serial number) to the pickings and moves.  This can make it possible to know which production lot was sent to a certain client, ..."
+msgstr "Esto permite asignar un lote (o nº de serie) a los remitos y movimientos, lo que puede hacer posible conocer qué lote de producción en concreto fue enviado a un cliente, ..."
+
+#. module: stock
+#: help:stock.location.path,picking_type_id:0
+msgid "This is the picking type associated with the different pickings"
+msgstr "Éste es el tipo de remito asociado con los diferentes remitos"
+
+#. module: stock
+#: view:stock.return.picking:stock.view_stock_return_picking_form
+msgid "This picking appears to be chained with another operation. Later, if you receive the goods you are returning now, make sure to"
+msgstr "Este remito parece estar encadenado con otra operación. Más tarde, si recibe los bienes que ahora está devolviendo, asegúrese de que"
+
+#. module: purchase
+#: help:purchase.order,picking_type_id:0
+msgid "This will determine picking type of incoming shipment"
+msgstr "Esto determinará el tipo de remito de la recepción"
+
+#. module: stock
+#: help:stock.config.settings,group_stock_multiple_locations:0
+msgid "This will show you the locations and allows you to define multiple picking types and warehouses."
+msgstr "Esto le mostrará las ubicaciones y le permitirá definir múltiples tipos de remito y almacenes."
+
+#. module: stock
+#: code:addons/stock/wizard/stock_return_picking.py:62
+#, python-format
+msgid "You may only return one picking at a time!"
+msgstr "¡Sólo puede devolver un remito a la vez!"
+
+#. module: stock
+#: code:addons/stock/wizard/stock_return_picking.py:72
+#, python-format
+msgid "You may only return pickings that are Done!"
+msgstr "Sólo puede devolver remitos que estén ya realizados."
+
+#. module: stock
+#. openerp-web
+#: code:addons/stock/static/src/xml/picking.xml:243
+#, python-format
+msgid "picking(s)"
+msgstr "remito(s)"
+
+#. module: stock
+#: help:stock.picking,quant_reserved_exist:0
+msgid "technical field used to know if there is already at least one quant reserved on moves of a given picking"
+msgstr "campo técnico usado para conocer si ya hay al menos un quant reservado en los movimientos de un remito dado"
+
+#. module: stock
+#: view:stock.return.picking:stock.view_stock_return_picking_form
+msgid "the returned picking in order to avoid logistic rules to be applied again (which would create duplicated operations)"
+msgstr "el remito devuelto para evitar que las reglas logísticas se apliquen otra vez (lo que crearía operaciones duplicadas)"

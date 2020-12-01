@@ -2,7 +2,10 @@
 # © 2015 ABF OSIELL <http://osiell.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, api, modules, _, sql_db
+import logging
+from psycopg2 import ProgrammingError
+from openerp import models, fields, api, modules, _, SUPERUSER_ID, sql_db
+from openerp.exceptions import ValidationError
 
 FIELDS_BLACKLIST = [
     'id', 'create_uid', 'create_date', 'write_uid', 'write_date',
@@ -71,6 +74,11 @@ class AuditlogRule(models.Model):
         u"Log Creates", default=True,
         help=(u"Select this if you want to keep track of creation on any "
               u"record of the model of this rule"))
+    log_custom_method = fields.Boolean(
+        u"Log Methods",
+        help=(u"Select this if you want to keep track of custom methods on "
+              u"any record of the model of this rule"))
+    custom_method_ids = fields.One2many('auditlog.methods', 'rule_id')
     log_type = fields.Selection(
         [('full', u"Full log"),
          ('fast', u"Fast log"),
@@ -101,22 +109,30 @@ class AuditlogRule(models.Model):
           "You cannot define another: please edit the existing one."))
     ]
 
-    def _register_hook(self):
+    def _register_hook(self, cr, ids=None):
         """Get all rules and apply them to log method calls."""
-        super(AuditlogRule, self)._register_hook()
+        super(AuditlogRule, self)._register_hook(cr)
         if not hasattr(self.pool, '_auditlog_field_cache'):
             self.pool._auditlog_field_cache = {}
         if not hasattr(self.pool, '_auditlog_model_cache'):
             self.pool._auditlog_model_cache = {}
-        if not self:
-            self = self.search([('state', '=', 'subscribed')])
-        return self._patch_methods()
+        if ids is None:
+            ids = self.search(cr, SUPERUSER_ID, [('state', '=', 'subscribed')])
+        return self._patch_methods(cr, SUPERUSER_ID, ids)
 
     @api.multi
     def _patch_methods(self):
         """Patch ORM methods of models defined in rules to log their calls."""
         updated = False
         model_cache = self.pool._auditlog_model_cache
+        try:
+            with self.env.cr.savepoint():
+                self.read()
+        except ProgrammingError:
+            logging.getLogger(__name__).error(
+                "Error reading auditlog rules. Logs will not be created. "
+                "Do you need to upgrade the auditlog module?", exc_info=True)
+            return False
         for rule in self:
             if rule.state != 'subscribed':
                 continue
@@ -131,29 +147,52 @@ class AuditlogRule(models.Model):
             if getattr(rule, 'log_create') \
                     and not hasattr(model_model, check_attr):
                 model_model._patch_method('create', rule._make_create())
-                setattr(type(model_model), check_attr, True)
+                setattr(model_model, check_attr, True)
                 updated = True
             #   -> read
             check_attr = 'auditlog_ruled_read'
             if getattr(rule, 'log_read') \
                     and not hasattr(model_model, check_attr):
                 model_model._patch_method('read', rule._make_read())
-                setattr(type(model_model), check_attr, True)
+                setattr(model_model, check_attr, True)
                 updated = True
             #   -> write
             check_attr = 'auditlog_ruled_write'
             if getattr(rule, 'log_write') \
                     and not hasattr(model_model, check_attr):
                 model_model._patch_method('write', rule._make_write())
-                setattr(type(model_model), check_attr, True)
+                setattr(model_model, check_attr, True)
                 updated = True
             #   -> unlink
             check_attr = 'auditlog_ruled_unlink'
             if getattr(rule, 'log_unlink') \
                     and not hasattr(model_model, check_attr):
                 model_model._patch_method('unlink', rule._make_unlink())
-                setattr(type(model_model), check_attr, True)
+                setattr(model_model, check_attr, True)
                 updated = True
+            # Check if custom methods are enabled and patch the different
+            # rule methods
+            if getattr(rule, 'log_custom_method'):
+                for custom_method in rule.custom_method_ids:
+                    check_attr = 'auditlog_ruled_%s' % custom_method.name
+
+                    if not hasattr(model_model, custom_method.name):
+                        raise ValidationError(
+                            _('Method %s does not exist for model %s.' % (
+                                custom_method.name,
+                                model_model
+                            )))
+
+                    if not hasattr(model_model, check_attr):
+                        model_model._patch_method(
+                            custom_method.name,
+                            rule._make_custom(
+                                custom_method.message,
+                                custom_method.use_active_ids,
+                                custom_method.context_field_number)
+                        )
+                        setattr(model_model, check_attr, True)
+                        updated = True
         return updated
 
     @api.multi
@@ -166,28 +205,36 @@ class AuditlogRule(models.Model):
                 if getattr(rule, 'log_%s' % method) and hasattr(
                         getattr(model_model, method), 'origin'):
                     model_model._revert_method(method)
-                    delattr(type(model_model), 'auditlog_ruled_%s' % method)
                     updated = True
+            if hasattr(rule, 'log_custom_method'):
+                for custom_method in rule.custom_method_ids:
+                    method = custom_method.name
+                    if hasattr(getattr(model_model, method), 'origin'):
+                        model_model._revert_method(method)
+                        updated = True
         if updated:
             modules.registry.RegistryManager.signal_registry_change(
                 self.env.cr.dbname)
 
-    @api.model
-    def create(self, vals):
+    # Unable to find a way to declare the `create` method with the new API,
+    # errors occurs with the `_register_hook()` BaseModel method.
+    def create(self, cr, uid, vals, context=None):
         """Update the registry when a new rule is created."""
-        new_record = super(AuditlogRule, self).create(vals)
-        if new_record._register_hook():
-            modules.registry.RegistryManager.signal_registry_change(
-                self.env.cr.dbname)
-        return new_record
+        res_id = super(AuditlogRule, self).create(
+            cr, uid, vals, context=context)
+        if self._register_hook(cr, [res_id]):
+            modules.registry.RegistryManager.signal_registry_change(cr.dbname)
+        return res_id
 
-    @api.multi
-    def write(self, vals):
+    # Unable to find a way to declare the `write` method with the new API,
+    # errors occurs with the `_register_hook()` BaseModel method.
+    def write(self, cr, uid, ids, vals, context=None):
         """Update the registry when existing rules are updated."""
-        super(AuditlogRule, self).write(vals)
-        if self._register_hook():
-            modules.registry.RegistryManager.signal_registry_change(
-                self.env.cr.dbname)
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        super(AuditlogRule, self).write(cr, uid, ids, vals, context=context)
+        if self._register_hook(cr, ids):
+            modules.registry.RegistryManager.signal_registry_change(cr.dbname)
         return True
 
     @api.multi
@@ -347,10 +394,83 @@ class AuditlogRule(models.Model):
 
         return unlink_full if self.log_type == 'full' else unlink_fast
 
+    @api.multi
+    def _make_custom(self, message, use_active_ids, context_field_number):
+        """Instanciate a read method that log its calls."""
+        self.ensure_one()
+        log_type = self.log_type
+
+        def custom(self, *args, **kwargs):
+            result = custom.origin(self, *args, **kwargs)
+
+            result2 = result
+            if not isinstance(result2, list):
+                result2 = [result]
+            # Old API
+            if args and isinstance(args[0], sql_db.Cursor):
+                cr, uid, ids = args[0], args[1], args[2]
+                if isinstance(ids, (int, long)):
+                    ids = [ids]
+
+                context = kwargs.get('context', {})
+
+                # Set specific context if it is defined by our rule
+                if not context and context_field_number:
+                    if context_field_number - 1 < len(args):
+                        context = args[context_field_number - 1]
+
+                if context.get('auditlog_disabled'):
+                    return result
+
+                env = api.Environment(cr, uid, {'auditlog_disabled': True})
+                rule_model = env['auditlog.rule']
+
+                # Overwrite the ids and object_model if it is required
+                # by the auditlog rule
+                object_model = self._name
+                if use_active_ids:
+                    if context.get('active_model'):
+                        if context.get('active_ids'):
+                            object_model = context.get(
+                                'active_model',
+                                object_model)
+                            ids = context.get('active_ids', ids)
+
+                rule_model.sudo().create_logs(
+                    env.uid, object_model, ids,
+                    message, None, None, {'log_type': log_type})
+            # New API
+            else:
+                if self.env.context.get('auditlog_disabled'):
+                    return result
+                self = self.with_context(auditlog_disabled=True)
+
+                context = self.env.context
+
+                # Overwrite the ids and object_model if it is required
+                # by the auditlog rule
+                ids = self.ids
+                object_model = self._name
+                if use_active_ids:
+                    if context.get('active_model'):
+                        if context.get('active_ids'):
+                            object_model = context.get(
+                                'active_model',
+                                object_model)
+                            ids = context.get('active_ids', ids)
+
+                rule_model = self.env['auditlog.rule']
+                rule_model.sudo().create_logs(
+                    self.env.uid, object_model, ids,
+                    message, None, None, {'log_type': log_type})
+            return result
+
+        return custom
+
     def create_logs(self, uid, res_model, res_ids, method,
                     old_values=None, new_values=None,
                     additional_log_values=None):
-        """Create logs. `old_values` and `new_values` are dictionaries, e.g:
+        """Create logs. `old_values` and `new_values` are dictionnaries, e.g:
             {RES_ID: {'FIELD': VALUE, ...}}
         """
         if old_values is None:
@@ -362,6 +482,12 @@ class AuditlogRule(models.Model):
         http_session_model = self.env['auditlog.http.session']
         for res_id in res_ids:
             model_model = self.env[res_model]
+            # Do an extra check for active_model situations where res_model
+            # is not preloaded in auditlog model_cache
+            if not self.pool._auditlog_model_cache.get(res_model):
+                self.pool._auditlog_model_cache[res_model] = \
+                    self.env['ir.model'].search([
+                        ('model', '=', res_model)]).id
             name = model_model.browse(res_id).name_get()
             res_name = name and name[0] and name[0][1]
             vals = {
@@ -527,7 +653,7 @@ class AuditlogRule(models.Model):
         to view logs on that model.
         """
         act_window_model = self.env['ir.actions.act_window']
-        model_ir_values = self.env['ir.values']
+        model_data_model = self.env['ir.model.data']
         for rule in self:
             # Create a shortcut to view logs
             domain = "[('model_id', '=', %s), ('res_id', '=', active_id)]" % (
@@ -542,12 +668,10 @@ class AuditlogRule(models.Model):
             rule.write({'state': 'subscribed', 'action_id': act_window.id})
             keyword = 'client_action_relate'
             value = 'ir.actions.act_window,%s' % act_window.id
-            model_ir_values.sudo().set_action(
-                'View_log_' + rule.model_id.model,
-                action_slot=keyword,
-                model=rule.model_id.model,
-                action=value)
-
+            model_data_model.sudo().ir_set(
+                'action', keyword, 'View_log_' + rule.model_id.model,
+                [rule.model_id.model], value, replace=True,
+                isobject=True, xml_id=False)
         return True
 
     @api.multi

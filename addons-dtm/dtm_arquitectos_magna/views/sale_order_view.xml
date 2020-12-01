@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+    <record id="view_sales_order_search_inherit" model="ir.ui.view" >
+        <field name="name">sale.order.search.inherit.extended</field>
+        <field name="model">sale.order</field>
+        <field name="priority" eval="20"/>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+
+            <filter string="Customer" position="after">
+            <filter string="Arquitectos" context="{'group_by': 'arquitecto_id'}" name="group_by_arquitecto"/>
+            </filter>
+        </field>
+    </record>
+
+        <record id="view_sales_order_form_inherit" model="ir.ui.view" >
+        <field name="name">sale.order.form.inherit.extended</field>
+        <field name="model">sale.order</field>
+        <field name="priority" eval="20"/>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+          <field name="user_id" position="after">
+              <field name="arquitecto_id"/>
+
+
+          </field>
+
+        </field>
+    </record>
+
+
+
+
+    </data>
+</openerp>
+

@@ -7,18 +7,19 @@ Audit Log - Track user operations
 =================================
 
 This module allows the administrator to log user operations performed on data
-models such as ``create``, ``read``, ``write`` and ``delete``.
+models such as ``create``, ``read``, ``write`` and ``delete``. Furthermore
+it allows logging of custom methods.
 
 Usage
 =====
 
-Go to `Settings / Technical / Audit / Rules` to subscribe rules. A rule defines
-which operations to log for a given data model.
+Go to `Reporting / Audit / Rules` to subscribe rules. A rule defines which
+operations to log for a given data model:
 
 .. image:: /auditlog/static/description/rule.png
 
-Then, check logs in the `Settings / Technical / Audit / Logs` menu. You can
-group them by user sessions, date, data model or HTTP requests:
+Then, check logs in the `Reporting / Audit / Logs` menu. You can group them by
+user sessions, date, data model or HTTP requests:
 
 .. image:: /auditlog/static/description/logs.png
 
@@ -33,6 +34,9 @@ To activate it and/or change the delay, go to the
 `Auto-vacuum audit logs` entry:
 
 .. image:: /auditlog/static/description/autovacuum.png
+
+During installation, a one-time script will migrate any existing data from the
+`audittrail` module (rules and logs).
 
 Known issues / Roadmap
 ======================
@@ -57,7 +61,6 @@ Contributors
 
 * Sebastien Alix <sebastien.alix@osiell.com>
 * Holger Brunn <hbrunn@therp.nl>
-* Holden Rehg <holdenrehg@gmail.com>
 
 Images
 ------

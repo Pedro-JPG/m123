@@ -4,8 +4,8 @@
 
 from cStringIO import StringIO
 
-from odoo.report.report_sxw import report_sxw
-from odoo.api import Environment
+from openerp.report.report_sxw import report_sxw
+from openerp.api import Environment
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -35,14 +35,11 @@ class ReportXlsx(report_sxw):
             self.env.cr, self.env.uid, ids, self.env.context)
         self.parser_instance.set_context(objs, data, ids, 'xlsx')
         file_data = StringIO()
-        workbook = xlsxwriter.Workbook(file_data, self.get_workbook_options())
+        workbook = xlsxwriter.Workbook(file_data)
         self.generate_xlsx_report(workbook, data, objs)
         workbook.close()
         file_data.seek(0)
         return (file_data.read(), 'xlsx')
-
-    def get_workbook_options(self):
-        return {}
 
     def generate_xlsx_report(self, workbook, data, objs):
         raise NotImplementedError()

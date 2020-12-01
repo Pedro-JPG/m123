@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="True">
+
+        <record model="res.bank" id="1">
+            <field name="name">Banco de la República Oriental del Uruguay</field>
+            <field name="bic">1</field>
+            <field name='active'>1</field>
+            <field name="street">Cerrito 351</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2915 0157</field>
+            <field name="fax">2916 1276</field>
+        </record>
+
+        <record model="res.bank" id="91">
+            <field name="name">Banco Hipotecario del Uruguay</field>
+            <field name="bic">91</field>
+            <field name='active'>1</field>
+            <field name="street">Fernández Crespo 1508</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">1911</field>
+            <field name="fax">1911 int. 4171</field>
+        </record>
+
+        <record model="res.bank" id="110">
+            <field name="name">Banco Bandes Uruguay S.A.</field>
+            <field name="bic">110</field>
+            <field name='active'>1</field>
+            <field name="street">Sarandí 402</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2916 0100</field>
+            <field name="fax"></field>
+        </record>
+
+        <record model="res.bank" id="113">
+            <field name="name">Banco Itaú Uruguay S.A.</field>
+            <field name="bic">113</field>
+            <field name='active'>1</field>
+            <field name="street">Zabala 1463</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2916 0127</field>
+            <field name="fax">2916 1739</field>
+        </record>
+
+        <record model="res.bank" id="128">
+            <field name="name">Nuevo Banco Comercial S.A.</field>
+            <field name="bic">128</field>
+            <field name='active'>1</field>
+            <field name="street">Misiones 1399</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2916 0541</field>
+            <field name="fax">2915 3569</field>
+        </record>
+
+        <record model="res.bank" id="134">
+            <field name="name">Discount Bank (Latin America) S.A.</field>
+            <field name="bic">134</field>
+            <field name='active'>1</field>
+            <field name="street">Rincón 390</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2916 4848</field>
+            <field name="fax">2916 0890</field>
+        </record>
+
+        <record model="res.bank" id="137">
+            <field name="name">Banco Santander S.A.</field>
+            <field name="bic">137</field>
+            <field name='active'>1</field>
+            <field name="street">Julio Herrera y Obes 1365</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">1747</field>
+            <field name="fax"></field>
+        </record>
+
+        <record model="res.bank" id="153">
+            <field name="name">Banco Bilbao Vizcaya Argentaria Uruguay S.A.</field>
+            <field name="bic">153</field>
+            <field name='active'>1</field>
+            <field name="street">25 de Mayo 401</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2916 1444</field>
+            <field name="fax">2916 1675</field>
+        </record>
+
+        <record model="res.bank" id="157">
+            <field name="name">HSBC Bank (Uruguay) S.A.</field>
+            <field name="bic">157</field>
+            <field name='active'>1</field>
+            <field name="street">Zabala 1403</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2915 3395</field>
+            <field name="fax">2916 0125</field>
+        </record>
+
+        <record model="res.bank" id="162">
+            <field name="name">Banque Heritage (Uruguay) S.A.</field>
+            <field name="bic">162</field>
+            <field name='active'>1</field>
+            <field name="street">Rincón 530</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2916 0177</field>
+            <field name="fax">2916 0241</field>
+        </record>
+
+        <record model="res.bank" id="205">
+            <field name="name">Citibank N.A. Sucursal Uruguay</field>
+            <field name="bic">205</field>
+            <field name='active'>1</field>
+            <field name="street">Cerrito 455</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2915 0374</field>
+            <field name="fax">1987 210</field>
+        </record>
+
+        <record model="res.bank" id="216">
+            <field name="name">Lloyds TSB Bank plc</field>
+            <field name="bic">216</field>
+            <field name='active'>1</field>
+            <field name="street">Zabala 1500</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2916 1370</field>
+            <field name="fax">2916 1262</field>
+        </record>
+
+        <record model="res.bank" id="246">
+            <field name="name">Banco de la Nación Argentina</field>
+            <field name="bic">246</field>
+            <field name='active'>1</field>
+            <field name="street">Juan C. Gomez 1372</field>
+            <field name="city">Montevideo</field>
+            <field name='state' ref='l10n_uy_states.MO'/>
+            <field name='country' ref='base.uy'/>
+            <field name="phone">2916 0078</field>
+            <field name="fax">2916 4582</field>
+        </record>
+
+    </data>
+</openerp>

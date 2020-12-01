@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+	<record id="account_bank_statement_form_inherit" model="ir.ui.view">
+		<field name="name">account.bank.statement.form</field>
+		<field name="model">account.bank.statement</field>
+		<field name="inherit_id" ref="account.view_bank_statement_form2"/>
+		<field name="arch" type="xml">		
+			<xpath expr="//notebook/page[@string='Cash Control']" position="replace"> 
+				<page string="Cash Control" attrs="{'invisible': [('cash_control','=',False)]}">
+					<field name="cash_control" invisible="1" />
+					<group col="2" expand="1">
+						<field name="opening_details_ids" nolabel="1" colspan="4" attrs="{'invisible' : [('state', '!=', 'draft')]}">
+							<tree string="Opening Cashbox Lines" editable="bottom">
+								<field name="pieces"/>
+								<field name="number_opening" string="Opening Unit Numbers" on_change="on_change_sub_opening(pieces, number_opening, parent.balance_end)"/>
+								<field name="subtotal_opening" string="Opening Subtotal"/>
+							</tree>
+						</field>
+						<field name="closing_details_ids" nolabel="1" colspan="4" attrs="{'invisible' : [('state', '=', 'draft')]}">
+							<tree string="Closing Cashbox Lines" editable="bottom">
+								<field name="pieces" readonly="1" />
+								<field name="number_opening" string="Opening Unit Numbers" readonly="1" />
+								<field name="subtotal_opening" string="Opening Subtotal" readonly="1" />
+								<field name="number_closing" string="Closing Unit Numbers" on_change="on_change_sub_closing(pieces, number_closing, parent.balance_end)"/>
+								<field name="subtotal_closing" string="Closing Subtotal"/>
+							</tree>
+						</field>
+					</group>
+				</page>					
+			</xpath>			
+		</field>
+	</record> 
+	<!-- -->
+	<record id="view_cash_statement_tree_inherit" model="ir.ui.view">
+		<field name="name">account.bank.statement.tree</field>
+		<field name="model">account.bank.statement</field>
+		<field name="inherit_id" ref="account.view_cash_statement_tree"/>
+		<field name="arch" type="xml">
+			<field name="state" position="after" >
+				<field name="cash_control" />
+			</field>
+		</field>
+    </record>
+</data>
+</openerp>

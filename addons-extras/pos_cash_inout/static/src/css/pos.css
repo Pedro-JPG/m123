@@ -1,0 +1,21 @@
+.popup{
+	width: 500px !important;
+    height: 255px !important;
+    border-radius: 10px !important;
+    margin-left: -205px !important;
+    font-size: 22px !important;
+    background-color: #FFFFFF ! important;
+    color: black !important;
+}
+#sub_title{
+	font-size: 15px !important;
+	color: #5c5ccc !important;
+}
+#tbl_css{
+	border-collapse: separate !important;
+    border-spacing: 10px !important;
+}
+input[type="text"]{
+    height: 19px !important;
+    width: 218px !important;
+}

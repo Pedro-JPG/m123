@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_voucher_customer_payment_inherit_button">
+            <field name="name">account.voucher.button.inherit</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"/>
+            <field name="model">account.voucher</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <data>
+                <xpath expr="//field[@name='line_cr_ids']" position="before">
+                    <button name="button_setear_vacio"
+                            type="object"
+                            string="Limpiar asignaciones"
+                            states="draft"
+                            class="oe_highlight"/>
+
+                    <button name="button_get_nro_dgi"
+                            type="object"
+                            string="Obtener Nro DGI"
+                            class="oe_highlight"/>
+
+                    <button name="button_eleminar_no_conciliado"
+                            type="object"
+                            string="Eliminar no Asignados"
+                            class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//page[@string='Payment Information']//field[@name='line_cr_ids']//tree[@string='Invoices and outstanding transactions']//field[@name='move_line_id']" position="before">
+                    <field name="nro_factura"/>
+                </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>

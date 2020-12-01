@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+       <record id="view_account_invoice_inherit_search" model="ir.ui.view">
+          <field name="name">account.invoice.search.expand</field>
+          <field name="model">account.invoice</field>
+          <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+          <field name="arch" type="xml">
+            <xpath expr="//search[@string='Search Invoice']/field[@name='number']" position="before">
+              <field name="fe_DocNro" string="N° DGI"/>
+            </xpath>
+          </field>
+        </record>
+
+
+    </data>
+</openerp>

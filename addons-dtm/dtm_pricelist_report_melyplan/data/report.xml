@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- QWeb Reports -->
+        <report
+            id="listado_qweb_id"
+            string="Listado_prouctos"
+            model="pricelist.report"
+            report_type="qweb-html"
+            file="dtm_pricelist_report_melyplan.report_listado_productos"
+            name="dtm_pricelist_report_melyplan.report_listado_productos"
+        />
+
+    </data>
+</openerp>

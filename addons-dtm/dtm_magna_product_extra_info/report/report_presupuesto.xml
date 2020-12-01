@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+        <report
+            id="report_presupuesto_order"
+            string="Presupuesto"
+            model="sale.order"
+            report_type="qweb-pdf"
+            file="dtm_magna_product_extra_info.report_presupuesto"
+            name="dtm_magna_product_extra_info.report_presupuesto"
+        />
+
+<template id="report_presupuesto">
+    <t t-call="report.external_layout">
+    <t t-foreach="docs" t-as="o">
+        <div class="page">
+            <div class="oe_structure"/>
+            <div class="row">
+                <div class="col-xs-6">
+                    <!--<t t-debug="ipdb"/>-->
+                    <strong t-if="o.partner_shipping_id == o.partner_invoice_id">Dirección de facturación y de envío:</strong>
+                    <strong t-if="o.partner_shipping_id != o.partner_invoice_id">Dirección de facturación:</strong>
+                    <div t-field="o.partner_invoice_id"
+                        t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
+                    <p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></p>
+                    <div t-if="o.partner_shipping_id != o.partner_invoice_id" class="mt8">
+                        <strong>Shipping address:</strong>
+                        <div t-field="o.partner_shipping_id"
+                            t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
+                        <p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></p>
+                    </div>
+                </div>
+                <div class="col-xs-5 col-xs-offset-1">
+                    <div t-field="o.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+                </div>
+            </div>
+
+            <h2>
+                <span t-if="o.state not in ['draft','sent']">Order N° </span>
+                <span t-if="o.state in ['draft','sent']">Presupuesto N° </span>
+                <span t-field="o.name"/>
+            </h2>
+
+            <div class="row mt32 mb32" id="informations">
+                <div t-if="o.client_order_ref" class="col-xs-3">
+                    <strong>Your Reference:</strong>
+                    <p t-field="o.client_order_ref"/>
+                </div>
+                <div t-if="o.date_order" class="col-xs-3">
+                    <strong t-if="o.state not in ['draft','sent']">Date Ordered:</strong>
+                    <strong t-if="o.state in ['draft','sent']">Fecha:</strong>
+                    <p t-field="o.date_order"/>
+                </div>
+                <div t-if="o.user_id.name" class="col-xs-3">
+                    <strong>Vendedor:</strong>
+                    <p t-field="o.user_id.name"/>
+                </div>
+                <div t-if="o.arquitecto_id.name" class="col-xs-3">
+                    <strong>Arquitecto:</strong>
+                    <p t-field="o.arquitecto_id.name"/>
+                </div>
+
+            </div>
+            <span>
+                <b><span class="text-center" t-field="o.order_line[0].name"></span>:</b><br/>
+                <span t-field="o.order_line[0].product_id.extra_info"></span><br/>
+            </span>
+            <br/>
+            <p t-field="o.note2" />
+
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <!--<t t-debug="ipdb"/>-->
+                        <th>Descripción</th>
+                        <!--<th>Taxes</th>-->
+                        <th class="text-right">Cantidad</th>
+
+                        <t t-set="imprimir" t-value="False"/>
+                        <t t-foreach="o.order_line" t-as="l">
+                             <t t-if="l.to_print"><t t-set="imprimir" t-value="True"/></t>
+                         </t>
+                        <t t-if="imprimir">
+                          <th class="text-right">Precio Unitario</th>
+                        </t>
+
+                        <th groups="sale.group_discount_per_so_line">Disc.(%)</th>
+
+                        <!--<t t-foreach="o.order_line" t-as="l">-->
+                             <!--<t t-if="l.to_print"><t t-set="imprimir" t-value="True"/></t>-->
+                        <!--</t>-->
+                        <t t-if="imprimir">
+                          <th class="text-right">Precio</th>
+                        </t>
+
+                    </tr>
+               </thead>
+               <tbody class="sale_tbody">
+                    <tr t-foreach="o.order_line" t-as="l">
+                        <td>
+                            <!--<span t-if="not l.product_id.extra_info and l.name"><span t-field="l.name"></span></span>-->
+                            <!--<span t-if="l.product_id.extra_info"><span t-field="l.product_id.extra_info"></span></span>-->
+                            <span t-field="l.name"/>
+
+                        </td>
+                        <!--
+                        <td>
+                            <span t-esc="', '.join(map(lambda x: x.name, l.tax_id))"/>
+                        </td>
+                        -->
+                        <td class="text-right">
+                            <span t-field="l.product_uom_qty"/>
+                            <span groups="product.group_uom" t-field="l.product_uom"/>
+                        </td>
+                        <td t-if="l.to_print" class="text-right">
+                            <span t-esc="round(l.price_unit * 1.22,2)"/>
+                        </td>
+                        <td groups="sale.group_discount_per_so_line">
+                            <span t-field="l.discount"/>
+                        </td>
+                        <td t-if="l.to_print" class="text-right">
+                            $ <span t-esc="round(l.price_subtotal * 1.22,2)"/>
+                            <!--<span t-field="l.price_subtotal"-->
+                                <!--t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <t t-set="obramano" t-value="False"/>
+                        <t t-set="valor" t-value="False"/>
+                        <t t-foreach="o.order_line" t-as="linea">
+                             <t t-if="linea.product_id.mano_obra">
+                                 <t t-set="obramano" t-value="True"/>
+                                 <t t-set="valor" t-value="linea.price_subtotal"/>
+                             </t>
+                         </t>
+                        <tr class="border-black">
+                            <td><strong>Sub equipo y materiales</strong></td>
+                            <td class="text-right">
+                                $ <span t-esc="round((o.amount_untaxed - valor)*1.22,2)"/>
+                            </td>
+                        </tr>
+                        <t t-if="obramano">
+                            <tr class="border-black">
+                                <td><strong>Mano de Obra e instalación</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.currency_id.symbol"></span> <span t-esc="round(valor*1.22,2)"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <!--<tr>-->
+                            <!--<td>Impuestos</td>-->
+                            <!--<td class="text-right">-->
+                                <!--<span t-field="o.amount_tax"-->
+                                    <!--t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <tr class="border-black">
+                            <td><strong>Total</strong></td>
+                            <td class="text-right">
+                                <span t-field="o.amount_total"
+                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                            </td>
+                        </tr>
+                        <!--<t t-debug="ipdb"/>-->
+
+                    </table>
+                </div>
+            </div>
+
+            <p t-field="o.note" />
+            <p t-if="o.payment_term.note">
+                <strong>Forma de pago:</strong>
+                <span t-field="o.payment_term.note"/>
+            </p>
+            <div class="oe_structure"/>
+        </div>
+    </t>
+        </t>
+</template>
+
+<template id="report_saleorder">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'sale.report_presupuesto')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

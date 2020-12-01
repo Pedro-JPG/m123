@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<document>
+    <template title="Recibo de Cliente"   pageSize="(20.9cm,29.6cm)" leftMargin="0cm" rightMargin="0cm" topMargin="0cm" bottomMargin="0cm" showBoundary="0" >
+
+        <pageTemplate id="Factura">
+            <frame id="1_moneda" x1="15.5cm" y1="27.4cm" width="1cm" height="1cm"/> 
+            <frame id="1_total" x1="16.5cm" y1="27.4cm" width="3.9cm" height="1cm"/>
+            <frame id="1_series" x1="0.9cm" y1="16.7cm" width="2.5cm" height="7.6cm"/>
+            <frame id="1_importes" x1="3.5cm" y1="16.7cm" width="2.7cm" height="7.6cm"/>
+            <frame id="1_fecha" x1="6.7cm" y1="23.7cm" width="13.2cm" height="1.5cm"/>
+            <frame id="1_cliente" x1="6.7cm" y1="22.2cm" width="13.2cm" height="1.5cm"/>
+            <frame id="1_cantidad" x1="6.7cm" y1="16.7cm" width="13.2cm" height="5.4cm"/>
+            <frame id="2_moneda" x1="15.5cm" y1="12.4cm" width="1cm" height="1cm"/>
+            <frame id="2_total" x1="16.5cm" y1="12.4cm" width="3.9cm" height="1cm"/>
+            <frame id="2_series" x1="0.9cm" y1="2cm" width="2.5cm" height="7.6cm"/>
+            <frame id="2_importes" x1="3.5cm" y1="2cm" width="2.7cm" height="7.6cm"/>
+            <frame id="2_fecha" x1="6.7cm" y1="8.9cm" width="13.2cm" height="1.5cm"/>
+            <frame id="2_cliente" x1="6.7cm" y1="7.4cm" width="13.2cm" height="1.5cm"/>
+            <frame id="2_cantidad" x1="6.7cm" y1="2cm" width="13.2cm" height="5.4cm"/>
+        </pageTemplate>
+
+    </template>
+
+    <stylesheet>
+        <blockTableStyle id="Standard_Outline">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+        </blockTableStyle>
+
+        <initialize>
+            <paraStyle name="all" alignment="justify"/>
+        </initialize>
+        
+        <paraStyle name="basico"  rightIndent="0.0" leftIndent="0.0" fontSize="10" leading="10" alignment="CENTER" spaceBefore="0.0" spaceAfter="0.0"  />
+
+         <paraStyle name="monto"  rightIndent="0.0" leftIndent="0.0" fontSize="10" leading="10" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"  />
+
+    </stylesheet>
+
+<story>
+<para>[[ repeatIn(objects,'o') ]]</para>
+    
+    <!-- Primera Via -->
+    <condPageBreak height="1"/>
+    <para style='basico'>[[o.journal_id.currency.symbol or '$']]</para>
+    <frameEnd/>
+
+    <condPageBreak height="1"/>
+        <para style='basico'>[[o.currency_fmt(o.amount)[0] or '']]</para>
+    <frameEnd/>
+    <currentFrame name='1_series'/>
+        <section>
+            <blockTable colWidths="2.5cm">
+                <tr>[[ repeatIn(o.line_cr_ids,'l')]]
+                    <td>
+                        <para style="basico" alignment="LEFT">[[o.get_fact_actual(l.move_line_id) or '']]</para>
+                    </td>
+                </tr>
+            </blockTable>
+        </section>
+    <nextFrame/>
+
+    <currentFrame name='1_importes'/>
+        <section>
+            <blockTable colWidths="2.9cm">
+                <tr>[[ repeatIn(o.line_cr_ids,'l')]]
+                    <td>
+                        <para style="basico" alignment="RIGHT">[[o.currency_fmt(l.amount)[0] or '']]</para>
+                    </td>
+                </tr>
+            </blockTable>
+        </section>
+    <nextFrame/>
+
+    <condPageBreak height="1"/>
+        <para style='basico'>[[o.fecha_fmt or '']]</para>
+    <frameEnd/>
+    <condPageBreak height="1"/>
+        <para style='monto'>Recibimos de [[o.partner_id.name or '']]</para>
+    <frameEnd/>
+
+    <condPageBreak height="1"/>
+        <para style='monto'>la cantidad de [[o.get_moneda_literal()[0] or '']] [[o.monto_literal(o.amount) or '']].-</para>
+    <frameEnd/>
+
+
+    <!-- Segunda Via -->
+
+    <condPageBreak height="1"/>
+        <para style='basico'>[[o.journal_id.currency.symbol or '$']]</para>
+    <frameEnd/>
+    <condPageBreak height="1"/>
+        <para style='basico'>[[o.currency_fmt(o.amount)[0] or '']]</para>
+    <frameEnd/>
+    <currentFrame name='2_series'/>
+        <section>
+            <blockTable colWidths="2.5cm">
+                <tr>[[ repeatIn(o.line_cr_ids,'l')]]
+                    <td>
+                        <para style="basico" alignment="LEFT">[[o.get_fact_actual(l.move_line_id) or '']]</para>
+                    </td>
+                </tr>
+            </blockTable>
+        </section>
+    <nextFrame/>
+
+    <currentFrame name='2_importes'/>
+        <section>
+            <blockTable colWidths="2.9cm">
+                <tr>[[ repeatIn(o.line_cr_ids,'l')]]
+                    <td>
+                        <para style="basico" alignment="RIGHT">[[o.currency_fmt(l.amount)[0] or '']]</para>
+                    </td>
+                </tr>
+            </blockTable>
+        </section>
+    <nextFrame/>
+
+    <condPageBreak height="1"/>
+        <para style='basico'>[[o.fecha_fmt or '']]</para>
+    <frameEnd/>
+    <condPageBreak height="1"/>
+        <para style='monto'>Recibimos de [[o.partner_id.name or '']]</para>
+    <frameEnd/>
+
+    <condPageBreak height="5"/>
+        <para style='monto'>la cantidad de [[o.get_moneda_literal()[0] or '']] [[o.monto_literal(o.amount) or '']].-</para>
+
+        
+</story>
+</document>

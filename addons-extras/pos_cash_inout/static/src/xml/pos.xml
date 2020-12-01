@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="PutMoneyIn">
+        <div class='control-button Put_Money_In'>
+            Entrada $
+        </div>
+    </t>
+
+    <t t-name="TakeMoneyOut">
+        <div class='control-button Take_Money_Out'>
+            Salida $
+        </div>
+    </t>
+
+    <t t-name="CustomPopupTakeMoneyOut">
+         <div class="modal-dialog">
+            <div class="popup popup-note-structure">
+                <span class='title'>
+                    <b>Sacar dinero</b><hr></hr>
+                </span>
+                <span id='sub_title'>
+                    <b>Movimiento manual de dinero</b>
+                </span>
+                <t t-raw="widget.msg_show_take_money_out"/>
+                <div class="footer">
+                    <div class="button ok">
+                        Apply
+                    </div>
+                    <div class="button cancel">
+                        Cancel
+                    </div>
+                </div>
+            </div>
+         </div>
+    </t>
+
+    <t t-name="CustomPopupPutMoneyIn">
+         <div class="modal-dialog">
+            <div class="popup popup-note-structure">
+                <span class='title'>
+                    <b>Poner Dinero</b><hr></hr>
+                </span>
+                <span id='sub_title'>
+                    <b>Movimiento manual de dinero</b>
+                </span>
+                <t t-raw="widget.msg_show_put_money_in"/>
+                <div class="footer">
+                    <div class="button ok">
+                        Apply
+                    </div>
+                    <div class="button cancel">
+                        Cancel
+                    </div>
+                </div>
+            </div>
+         </div>
+    </t>
+
+</templates>

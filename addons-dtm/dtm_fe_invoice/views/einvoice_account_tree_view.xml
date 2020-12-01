@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+    <record id="account_invoice_tree_view_inht" model="ir.ui.view">
+        <field name="name">account.invoice.ext.view.inht</field>
+        <field name="model">account.invoice</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account.invoice_tree"/>
+        <field name="arch" type="xml">
+        <field name="partner_id" position="before">
+            <field name="doct_type"/>
+        </field>
+        </field>
+    </record>
+
+
+    </data>
+</openerp>

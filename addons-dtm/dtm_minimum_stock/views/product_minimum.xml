@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_product_minimum_stock" model="ir.ui.view">
+            <field name="name">product.product.minimum.stock.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="priority" eval="10"/>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='virtual_available']" position="after">
+                        <field name="qty_minimum"/>
+                        <field name="qty_minimum_hidden" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- IMPRESION DE INFORMES -->
+        <record model="ir.ui.view" id="view_minimum_stock_report_form">
+            <field name="name">minimum.stock.report.form</field>
+            <field name="model">listado.stock.minimo</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form >
+                    <div attrs="{'invisible': [('listado','!=',False)]}" >
+                        <sheet>
+                            <group string="Generación de informes" colspan="2">
+                                <field name="marca" style="width: 35%%"/>
+                                <field name="categ_id" />
+                            </group>
+                            <footer>
+                                <button name="generar_planilla" string="Generar" type="object"/>
+                            </footer>
+                        </sheet>
+                    </div>
+                    <field name="listado" nolabel="1" readonly="1" colspan="4"/>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_minimum_stock_report">
+            <field name="name">Stock Minimo</field>
+            <field name="res_model">listado.stock.minimo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+
+        <menuitem
+            id="menu_action_minimum_stock_planillas"
+            parent="stock.next_id_61"
+            action="action_minimum_stock_report"
+            sequence="4"
+        />
+    </data>
+</openerp>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_voucher_filter_customer_pay_inherit_1" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.select.inherit_1</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_customer_pay"/>
+            <field name="model">account.voucher</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@string='Customer']" position="before">
+                    <filter string="Sales agent" icon="terp-personal" domain="[]" context="{'group_by':'vendedor_name'}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

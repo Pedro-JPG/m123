@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+    <record id="account_voucher_payment_check_form_view" model="ir.ui.view">
+        <field name="name">account.voucher.check.form.view</field>
+        <field name="model">account.voucher</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account_check_writing.view_vendor_payment_check_form"/>
+        <field name="arch" type="xml">
+        <field name="amount_in_word" position="replace">
+            <field name="amount_in_word" attrs="{'invisible':[('allow_check','!=',True)]}" nolabel="1" colspan="6" invisible="1"/>
+        </field>
+        </field>
+    </record>
+
+
+    </data>
+</openerp>

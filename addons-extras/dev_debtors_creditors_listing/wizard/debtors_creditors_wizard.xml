@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_debtors_creditors_wizard" model="ir.ui.view">
+		    <field name="name">view.debtors.creditors.wizard</field>
+		    <field name="model">debtors.creditor.wizard</field>
+		    <field name="type">form</field>
+		    <field name="arch" type="xml">
+		    <form string="Composición de Saldos Deudores/Acreedores">
+		            <group>
+		                <field name="company_id" string="Compañía"/>
+		                <field name="debtor_creditor" string="Reporte"/>
+		                <field name="date_from" string="Fecha desde"/>
+		                <field name="date_to" string="Fecha hasta"/>
+		            </group>
+		        <footer>
+		            <button name="print_pdf" string="PDF" type="object" class="oe_highlight"/>
+		            or
+		            <button name="print_excel" string="Excel" type="object" class="oe_highlight"/>
+		            or
+		            <button string="Cancelar" class="oe_link" special="cancel" />
+		        </footer>
+		    </form>
+		    </field>
+		</record>
+
+		<!--OPEN EXCEL FILE-->
+		<record id="view_debtors_creditors_excel" model="ir.ui.view">
+		    <field name="name">view.debtors.creditors.excel</field>
+		    <field name="model">debtors.creditor.excel</field>
+		    <field name="arch" type="xml">
+		        <form string="Reporte en Excel">
+		            <group>
+		                <field name="excel_file" readonly="1" filename="file_name"/>
+		                <field name="file_name" invisible="1"/>
+		            </group>
+		        </form>
+		    </field>
+		</record>
+
+		<record id="action_debtors_creditors_report" model="ir.actions.act_window">
+		    <field name="name">Composición de Saldos Deudores/Acreedores</field>
+		    <field name="type">ir.actions.act_window</field>
+		    <field name="res_model">debtors.creditor.wizard</field>
+		    <field name="view_type">form</field>
+			<field name="view_id" ref="view_debtors_creditors_wizard"/>
+		    <field name="view_mode">form</field>
+		    <field name="target">new</field>
+		</record>
+
+             
+    	<menuitem id="menu_debtors_creditors_main_menu"  parent="account.menu_finance_legal_statement" string="Composición de Saldos Deudores/Acreedores"  action="action_debtors_creditors_report"/>
+	</data>
+</openerp>

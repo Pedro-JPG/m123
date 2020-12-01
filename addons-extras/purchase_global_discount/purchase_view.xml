@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        
+        <record id="purchase_order_line_form_global_discount_wizard_inherit1" model="ir.ui.view">
+            <field name="name">purchase.order.line.form.global_discount.wizard.inherit1</field>
+            <field name="model">purchase.order.line</field>
+            <field name="inherit_id" ref="purchase.purchase_order_line_form" />
+            <field name="arch" type="xml">
+                <field name="price_unit" position="before">
+                    <field name="orig_price_unit" string="Precio sin descuento"/>
+                </field>
+                
+                <field name="price_unit" position="after">
+                    <field name="discount" string="Descuento(%)"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="purchase_order_form_purchase_global_discount_wizard_inherit1" model="ir.ui.view">
+            <field name="name">purchase.order.purchase.order.global_discount.wizard.inherit1</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <field name="order_line" position="before">
+                    <button name="%(action_purchase_global_discount_wizard_form)d" string="Descuento Global"
+                            type="action" attrs="{'invisible':[('state','not in',['draft','sent'])]}"
+                            groups="purchase.group_purchase_user, purchase.group_purchase_manager" />
+                </field>
+
+                <!--<xpath expr="//page[@string='Products']/field[@name='order_line']/tree" position="attributes">-->
+                    <!--<attribute name="editable"/>-->
+                <!--</xpath>-->
+                <xpath expr="//page[@string='Products']/field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+                    <field name="orig_price_unit" string="Precio sin descuento"/>
+                </xpath>
+
+                <xpath expr="//page[@string='Products']/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="discount" string="Descuento(%)"/>
+                </xpath>
+
+                <xpath expr="//page[@string='Products']/field[@name='order_line']/tree/field[@name='company_id']" position="replace">
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="discount_purchase_view_form" model="ir.ui.view">
+            <field name="name">discount.purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+
+                <field name="partner_ref" position="attributes">
+
+                    <attribute name="string">Nro carpeta</attribute>
+
+
+                </field>
+
+                <field name="partner_ref" position="attributes">
+                    <attribute name="attrs">{'required': [('state','=','approved')],'readonly': [('state','!=','approved')],'invisible': [('state','not in',('approved','done'))]}</attribute>
+                </field>
+
+
+
+                <group class="oe_subtotal_footer oe_right" position="replace">
+
+                        <!--<group col="4">-->
+                        <!--<group name="discount" colspan="2">-->
+                            <!--<field name="discount_type"/>-->
+                            <!--<field name="discount_rate"/>-->
+                        <!--</group>-->
+
+
+                            <group class="oe_subtotal_footer oe_right">
+                                 <field name="amount_untaxed_without_discounts" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+
+                                <field name="amount_discount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}" string="Subtotal con descuentos"/>
+
+                            <!--<field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>-->
+                                <field name="amount_tax_basica" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_tax_minima" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+
+                            <div class="oe_subtotal_footer_separator oe_inline">
+                                <label for="amount_total" />
+                                <button name="button_dummy"
+                                        states="draft,sent" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                            </div>
+                            <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                     </group>
+
+
+            </field>
+        </record>
+        
+    </data>
+</openerp>    
+            
+            

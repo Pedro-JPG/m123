@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="invoice_supplier_form_required">
+            <field name="name">account.invoice.extender</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='reference']" position="attributes">
+                    <attribute name="attrs">{'required':'True'}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_due']" position="attributes">
+                    <attribute name="attrs">{'required':'True'}</attribute>
+                </xpath>
+                <xpath expr="//page[@string='Invoice']//field[@name='account_analytic_id']" position="attributes">
+                    <attribute name="attrs">{'required':'True'}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

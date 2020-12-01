@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<report id="report_menu_deb_cre_id"
+			    model="debtors.creditor.wizard"
+			    string="Composición de Saldos"
+			    report_type="qweb-pdf"
+			    name="dev_debtors_creditors_listing.debtors_creditord_report" 
+			    file="dev_debtors_creditors_listing.debtors_creditord_report"
+			    />
+    </data>
+</openerp>
+
+
+

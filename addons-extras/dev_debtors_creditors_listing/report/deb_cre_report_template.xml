@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="debtors_creditord_report">
+			<t t-call="report.external_layout">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<style>
+						    th{
+						        border-bottom:1px solid black !important;
+						        padding:3px;
+						        font-family: "Lucida Console";
+						    }
+						    .line_tr td{
+						        border-bottom:1px solid #eff2f7;
+						        padding:3px;
+						    }
+						</style>
+						<div class="row">
+						    <div class="col-xs-12">
+						        <table style="width:100%">
+						            <tr>
+						            	<t t-if="o.debtor_creditor == 'debtor'">
+						            		<td><center><h4>Composición Saldo Deudores</h4></center> <br/></td>
+						            	</t>
+						            	<t t-if="o.debtor_creditor == 'creditor'">
+						            		<td><center><h4>Composición Saldo Acreedores</h4></center> <br/></td>
+						            	</t>
+						            </tr>
+						        </table>
+						    </div>
+						    <div class="col-xs-12">
+						        <table style="width:100%">
+						            <tr>
+						               <td><center><span t-field="o.date_from" t-field-options="{&quot;format&quot;: &quot;dd-MM-yyyy&quot;}" />  hasta <span t-field="o.date_to" t-field-options="{&quot;format&quot;: &quot;dd-MM-yyyy&quot;}"/></center></td>
+						            </tr>
+						        </table>
+		           			 </div>
+						    <div class="row mt16 mb16"/>
+						    <div class="col-xs-12">
+						    <table style="font-size:12px;" width="100%">
+						        <thead>
+						            <tr>
+						                <th width="15%" style="border-bottom:1px solid black" class="text-left">Código</th>
+						                <th width="55%" style="border-bottom:1px solid black" class="text-left">Nombre</th>
+						                <th width="15%" style="border-bottom:1px solid black" class="text-right">Debe</th>
+						                <th width="15%" style="border-bottom:1px solid black" class="text-right">Haber</th>
+						            </tr>
+						        </thead>
+						            <tbody>
+						            <t t-set="total_debit" t-value="0" />
+						            <t t-set="total_credit" t-value="0" />
+						            <t t-foreach="o.get_line_data()" t-as="lines">
+						                <tr>
+						                    <td style="border-bottom:1px solid gray;border-top:1px solid black;padding:3px;background:#f7f8f9" class="text-left">
+						                       <span t-esc="lines['code']"/>
+						                    </td>
+						                    <td style="border-bottom:1px solid gray;border-top:1px solid black;padding:3px;background:#f7f8f9" class="text-left">
+						                       <span t-esc="lines['name']"/>
+						                    </td>
+						                    <td style="border-bottom:1px solid gray;border-top:1px solid black;padding:3px;background:#f7f8f9" class="text-right">
+						                       <span t-esc="lines['debit']"/>
+						                       <t t-set="total_debit" t-value="total_debit+lines['debit']" />
+						                    </td>
+						                    <td style="border-bottom:1px solid gray;border-top:1px solid black;padding:3px;background:#f7f8f9" class="text-right">
+						                       <span t-esc="lines['credit']"/>
+						                       <t t-set="total_credit" t-value="total_credit+lines['credit']" />
+						                    </td>
+						                </tr>
+						            </t>
+						            <tr>
+						                    <td style="border:1px 0 1px 0 solid black;" class="text-left">
+						                    </td>
+						                    <td style="border:1px 0 1px 0 solid black" class="text-right">
+						                       <b>TOTAL</b>
+						                    </td>
+						                    <td style="border:1px 0 1px 0 solid black" class="text-right">
+						                       <span t-esc="total_debit"/>
+						                    </td>
+						                    <td style="border:1px 0 1px 0 solid black" class="text-right">
+						                       <span t-esc="total_credit"/>
+						                    </td>
+						                </tr>
+						            
+						            </tbody>
+						    
+						    </table>
+						    </div>
+						</div>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</openerp>

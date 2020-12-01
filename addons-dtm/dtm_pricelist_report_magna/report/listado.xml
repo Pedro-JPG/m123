@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_listado_productos">
+            <html>
+                <head>
+                    <style>
+                        <t t-call="dtm_report_layouts.style_dtm"/>
+
+                    </style>
+                </head>
+                <t t-call="dtm_report_layouts.external_layout_dtm"/>
+                <div class="page">
+                    <div class="row">
+                        <table width="100%">
+                            <tr>
+                                <th text-align="left">
+                                    <h4>
+                                        <span>Vigencia: <t t-esc="f_vigencia"/></span>
+                                    </h4>
+                                </th>
+                                <th colspan="7"/>
+                            </tr>
+                        </table>
+                        <table width="100%" class="table-condensed">
+                            <thead>
+                                <tr>
+                                    <th style='text-align:left' colspan="4">Producto</th>
+                                    <th style='text-align:right'>I.V.A.</th>
+                                    <th style='text-align:right'>Precio $</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="lineas" t-as="l">
+                                    <t t-if="l['tipo']=='cat'">
+                                        <tr style="background-color:#DCDCDC;">
+                                            <td style='text-align:left' colspan="8">
+                                                <t t-esc="l['name']"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="l['tipo']=='prod'">
+                                        <tr>
+                                            <td style='text-align:left;' colspan="4" ><t t-esc="l['name']"/></td>
+                                            <td style='text-align:right;'><t t-esc="l['iva']"/></td>
+                                            <td style='text-align:right;'><t t-esc="l['unit']"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </html>
+        </template>
+    </data>
+</openerp>
