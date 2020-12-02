@@ -1,1 +1,0 @@
-from . import magna_recibo
